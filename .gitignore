@@ -17,4 +17,4 @@ DerivedData
 .idea/
 *.o
 */Iconr
-pod/
+Pods/
