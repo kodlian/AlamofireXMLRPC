@@ -144,14 +144,14 @@ Alamofire.request(request) // Call XMLRPC service with Alamofire
 #### Mapping
 AlamofireXMLRPC uses the following mapping for swift values to XML RPC values:
 
-| Swift          | Example      | XMLRPC  | note|
-| -------------  |:-------------:| ---------- | -:|
-| String        | "foo"         | ```<string>foo</string>``` ||
-| Int, Int32, Int16, Int8, UInt16, UInt8 | 42    | ```<int>42</int>``` | XML RPC Integer are 32bits, Int values are converted to Int32 |
-| Bool | true    | ```<boolean>1</boolean>``` ||
-| Double, Float | 3.44      | ```<double>3.44</double>```| |
-| NSDate | NSDate()      |```<dateTime.iso8601>19980717T14:08:55</dateTime.iso8601>```||
-| NSData | NSData()      |```<base64>eW91IGNhbid0IHJlYWQgdGhpcyE=</base64>```||
+| Swift   					| Example	| XMLRPC  							| note 								|
+|:---------------------------------------------:|:-------------:|:-------------------------------------------------------------:|:-------------------------------------------------------------:|
+| String        				| "foo"         | ```<string>foo</string>``` 					| 								|
+| Int, Int32, Int16, Int8, UInt16, UInt8 	| 42   		| ```<int>42</int>``` 						| XML RPC Integer is 32bits, Int values are converted to Int32 	|
+| Bool 						| true  	| ```<boolean>1</boolean>``` 					| 								|
+| Double, Float 				| 3.44      	| ```<double>3.44</double>```					| 								|
+| NSDate 					| NSDate() 	| ```<dateTime.iso8601>19980717T14:08:55</dateTime.iso8601>``` 	| 								|
+| NSData 					| NSData()  	| ```<base64>eW91IGNhbid0IHJlYWQgdGhpcyE=</base64>``` 		| 								|
 
 By default other types will be mapped as XML RPC String and use the default String representation. Bu you can provide your own mapping for custom Types by adopting the protocol ```XMLRPCValueConvertible```.
 
@@ -189,7 +189,7 @@ As well dictionaries ```[String:Any]``` are convertible to XMLRPC structure by c
 XMLRPC Responses are handled with the method ```responseXMLRPC(completionHandler: Response<[XMLRPCNode], NSError> -> Void)```. The received parameters are mapped to an ```XMLRPCNode```. This allows you to fetch easily data within complex structure or tree.
 
 #### Subscript
-For each XMLRPCNode you can access subelement by index or by String key. Internally the node will fetch children node within XMLRPC Array and Structure.
+For each XMLRPCNode you can access subnode by index or by String key. Internally children of XMLRPC Array and Structure will be fetched.
 
 ```swift
 aRequest.responseXMLRPC{ (response:Response<[XMLRPCNode], NSError>) -> Void in
@@ -203,7 +203,7 @@ aRequest.responseXMLRPC{ (response:Response<[XMLRPCNode], NSError>) -> Void in
 }
 ```
 
-Don't worry about unwrapping things and checking the value type or presence. The optional management is done solely when you request the swift value with one of the optional getters.
+Don't worry about unwrapping things and checking the value type or presence. The optional management is solely done when you request the swift value with one of the optional getters.
 
 For instance, you can call ```value[0]["aKey"][9]``` without worrying if the objects tree actually exist.
 
@@ -220,7 +220,7 @@ var count: Int?
 ```
 
 ## License
-Alamofire is released under the MIT license. See [LICENSE](LICENSE) for details.
+AlamofireXMLRPC is released under the MIT license. See [LICENSE](LICENSE) for details.
 
 ## TO DO
 - XMLRPCNode enumeration
