@@ -80,7 +80,7 @@ public extension URLRequestConvertible where Self:XMLRPCRequestConvertible {
 
 // MARK: - Response
 extension Request {
-    private static func XMLRPCResponseSerializer() -> ResponseSerializer<[XMLRPCNode], NSError> {
+    private static func XMLRPCResponseSerializer() -> ResponseSerializer<XMLRPCNode, NSError> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else { return .Failure(error!) }
             
@@ -104,8 +104,9 @@ extension Request {
                 return .Failure(error)
             }
             
-            if let parameters = XMLRPCNode(xml: xml[.MethodResponse][.Parameters]).array {
-                return .Success(parameters)
+            let params = xml[.MethodResponse][.Parameters]
+            if params.rpcNode == .Parameters {
+                return .Success(XMLRPCNode(xml:params))
             }
             else {
                 let failureReason = "Response parameters response could not be found."
@@ -117,7 +118,7 @@ extension Request {
         }
     }
     
-    public func responseXMLRPC(completionHandler: Response<[XMLRPCNode], NSError> -> Void) -> Self {
+    public func responseXMLRPC(completionHandler: Response<XMLRPCNode, NSError> -> Void) -> Self {
         return response(responseSerializer: Request.XMLRPCResponseSerializer(), completionHandler: completionHandler)
     }
 }
