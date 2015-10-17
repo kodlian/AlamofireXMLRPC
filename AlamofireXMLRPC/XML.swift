@@ -62,8 +62,6 @@ extension AEXMLElement {
         return addChild(name: rpcValue.xmlRpcKind.rawValue, value: rpcValue.xmlRpcValue)
     }
 }
-
-// MARK: - Collectiom
 struct UnknownRPCValue: XMLRPCValueConvertible {
     var xmlRpcKind: XMLRPCValueKind { return .String }
     private(set) var xmlRpcValue: String
@@ -73,6 +71,7 @@ struct UnknownRPCValue: XMLRPCValueConvertible {
     }
 }
 
+// MARK: - Collectiom
 protocol XMLRPCArrayType { }
 extension Array: XMLRPCArrayType { }
 
@@ -125,6 +124,16 @@ extension AEXMLElement {
             member.addRPCValue(value)
         }
     }
+    
+    var rpcChildren: [AEXMLElement]? {
+        guard rpcNode == XMLRPCNodeKind.Array || rpcNode == XMLRPCNodeKind.Parameters else {
+            return nil
+        }
+        
+        return rpcNode == XMLRPCNodeKind.Array ? self[.Data].children : children
+    }
+ 
+    
 }
 
 // MARK: - Browse
@@ -135,7 +144,7 @@ public struct XMLRPCNode {
     var xml: AEXMLElement
 
     init(var xml: AEXMLElement) {
-        if xml.rpcNode == .Value &&  xml.children.count > 0 {
+        while (xml.rpcNode == .Value || xml.rpcNode == .Parameter) &&  xml.children.count > 0 {
             if let child = xml.children.first {
                 xml = child
             }
@@ -144,16 +153,15 @@ public struct XMLRPCNode {
     }
 
     public var array: [XMLRPCNode]? {
-        if xml.rpcNode == XMLRPCNodeKind.Array {
-            return xml[.Data].all?.map { e in
-                return XMLRPCNode(xml: e[XMLRPCNodeKind.Value])
+        if let children = xml.rpcChildren {
+            return children.map { e in
+                if let value = e.first {
+                    return XMLRPCNode(xml: value)
+                }
+                return self.dynamicType.errorNode
             }
         }
-        else if xml.rpcNode == XMLRPCNodeKind.Parameters {
-            return xml.all?.map { e in // Handle strings with string ommited
-                return XMLRPCNode(xml: e[XMLRPCNodeKind.Parameter][XMLRPCNodeKind.Value])
-            }
-        }
+        
         return nil
     }
     
@@ -161,18 +169,15 @@ public struct XMLRPCNode {
         guard xml.rpcNode == XMLRPCNodeKind.Structure else {
             return nil
         }
-        guard let children = xml.all else {
-            return nil
-        }
         
         var dictionary = [String:XMLRPCNode]()
         
-        for child in children {
+        for child in xml.children {
             if let key = child[XMLRPCNodeKind.Name].value {
                 dictionary[key] = XMLRPCNode(xml: child[XMLRPCNodeKind.Value])
             }
-            
         }
+        
         return dictionary
     }
     
@@ -180,6 +185,7 @@ public struct XMLRPCNode {
         guard xml.rpcValueKind == XMLRPCValueKind.String || (xml.rpcNode == .Value && xml.children.count == 0) else {
             return nil
         }
+        
         return xml.value
     }
     
@@ -217,7 +223,6 @@ public struct XMLRPCNode {
     }
     
     public subscript(key: String) -> XMLRPCNode {
-        
         guard xml.rpcNode == XMLRPCNodeKind.Structure else {
             return self.dynamicType.errorNode
         }
@@ -228,13 +233,18 @@ public struct XMLRPCNode {
         }
         
         return self.dynamicType.errorNode
-    
     }
+
+    public var count: Int? {
+        return xml.rpcChildren?.count
+    }
+
     public subscript(key: Int) -> XMLRPCNode {
-        guard xml.rpcNode == XMLRPCNodeKind.Array || xml.rpcNode == XMLRPCNodeKind.Parameters else {
-            return self.dynamicType.errorNode
+        guard let children = xml.rpcChildren where (key >= 0 && key < children.count) else {
+           return self.dynamicType.errorNode
         }
-        return XMLRPCNode(xml: xml.children[key])
+
+        return XMLRPCNode(xml: children[key])
     }
 
 }
