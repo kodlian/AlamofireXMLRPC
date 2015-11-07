@@ -80,7 +80,7 @@ public extension URLRequestConvertible where Self:XMLRPCRequestConvertible {
 
 // MARK: - Response
 extension Request {
-    private static func XMLRPCResponseSerializer() -> ResponseSerializer<XMLRPCNode, NSError> {
+    public static func XMLRPCResponseSerializer() -> ResponseSerializer<XMLRPCNode, NSError> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else { return .Failure(error!) }
             

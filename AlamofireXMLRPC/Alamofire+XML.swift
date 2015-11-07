@@ -11,7 +11,7 @@ import AEXML
 import Alamofire
 
 extension Request {
-    static func XMLResponseSerializer() -> ResponseSerializer<AEXMLDocument, NSError> {
+    public static func XMLResponseSerializer() -> ResponseSerializer<AEXMLDocument, NSError> {
         return ResponseSerializer { request, response, data, error in
             guard error == nil else { return .Failure(error!) }
 
