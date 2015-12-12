@@ -155,7 +155,7 @@ public struct XMLRPCNode {
     public var array: [XMLRPCNode]? {
         if let children = xml.rpcChildren {
             return children.map { e in
-                if let value = e.first {
+                if let value = e.children.first {
                     return XMLRPCNode(xml: value)
                 }
                 return self.dynamicType.errorNode
