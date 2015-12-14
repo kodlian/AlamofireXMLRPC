@@ -222,6 +222,17 @@ public struct XMLRPCNode {
         return Int32(v) == 1
     }
     
+    public var data: NSData? {
+        guard xml.rpcValueKind == XMLRPCValueKind.Base64 else {
+            return nil
+        }
+        guard let v = xml.value else {
+            return nil
+        }
+        
+        return NSData(base64EncodedString: v, options: .IgnoreUnknownCharacters)
+    }
+    
     public subscript(key: String) -> XMLRPCNode {
         guard xml.rpcNode == XMLRPCNodeKind.Structure else {
             return self.dynamicType.errorNode
