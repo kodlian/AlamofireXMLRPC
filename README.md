@@ -102,7 +102,7 @@ It will generate the following call and lets you parse the corresponding answer 
  - Xcode 7
 
 ## Install CocoaPods
-You can use [Cocoapods](http://cocoapods.org/) to install `AlamofireXMLRPC`by adding it to your `Podfile`:
+You can use [CocoaPods](http://cocoapods.org/) to install `AlamofireXMLRPC`by adding it to your `Podfile`:
 ```ruby
 use_frameworks!
 
