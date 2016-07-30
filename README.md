@@ -21,7 +21,7 @@ Take the following request and response handler:
 ```swift
 let data: NSData = ...
 let params: [Any] = [42, "text", 3.44, NSDate(), data]
-AlamofireXMLRPC.request("http://localhost:8888/xmlrpc", methodName: "foo", parameters: params).responseXMLRPC { (response:Response<[XMLRPCNode], NSError>) -> Void in
+AlamofireXMLRPC.request("http://localhost:8888/xmlrpc", methodName: "foo", parameters: params).responseXMLRPC { (response:Response<XMLRPCNode, NSError>) -> Void in
       guard response.result.isSuccess else {
         ...
         return
@@ -186,13 +186,13 @@ As well dictionaries ```[String:Any]``` are convertible to XMLRPC structure by c
 
 ## Response
 ### Response
-XMLRPC Responses are handled with the method ```responseXMLRPC(completionHandler: Response<[XMLRPCNode], NSError> -> Void)```. The received parameters are mapped to an ```XMLRPCNode```. This allows you to fetch easily data within complex structure or tree.
+XMLRPC Responses are handled with the method ```responseXMLRPC(completionHandler: Response<XMLRPCNode, NSError> -> Void)```. The received parameters are mapped to an ```XMLRPCNode```. This allows you to fetch easily data within complex structure or tree.
 
 #### Subscript
 For each XMLRPCNode you can access subnode by index or by String key. Internally children of XMLRPC Array and Structure will be fetched.
 
 ```swift
-aRequest.responseXMLRPC{ (response:Response<[XMLRPCNode], NSError>) -> Void in
+aRequest.responseXMLRPC{ (response:Response<XMLRPCNode, NSError>) -> Void in
       guard let value = response.result.value where response.result.isSuccess else {
         return
       }
