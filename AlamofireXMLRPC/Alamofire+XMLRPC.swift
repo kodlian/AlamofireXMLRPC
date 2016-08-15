@@ -10,6 +10,19 @@ import Foundation
 import Alamofire
 import AEXML
 
+// MARK: - Document Call
+class XMLRPCCallDocument: AEXMLDocument {
+    init(methodName: String, parameters someParams: [Any]?) {
+        // Build XMLRPC Call
+        super.init(version: 1.0)
+        let xmlMethodCall = addChild(rpcNode: .MethodCall)
+        xmlMethodCall.addChild(rpcNode: .MethodName, value:methodName)
+        if let params = someParams {
+            xmlMethodCall.addChild(AEXMLElement(rpcParams: params))
+        }
+    }
+}
+
 // MARK: -
 extension Manager {
     public func requestXMLRPC(URLString: URLStringConvertible, methodName: String, parameters: [Any]?, headers: [String : String]? = nil) -> Request {
