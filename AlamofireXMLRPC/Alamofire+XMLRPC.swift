@@ -97,11 +97,11 @@ extension Request {
                 return .Failure(.Fault(node: XMLRPCNode(xml: fault)))
             }
 
-            let params = xml[.MethodResponse][.Parameters]
+            let params = xmlResponse[.Parameters]
             if params.rpcNode == .Parameters {
                 return .Success(XMLRPCNode(xml:params))
             } else {
-                return .Failure(.NodeNotFound(node: .MethodResponse))
+                return .Failure(.NodeNotFound(node: .Parameters))
             }
 
 
