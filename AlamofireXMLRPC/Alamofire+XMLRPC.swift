@@ -88,13 +88,13 @@ extension Request {
             }
 
             let xmlResponse = xml[.MethodResponse]
-            guard xmlResponse.error != nil else {
+            guard xmlResponse.error == nil else {
                 return .Failure(.NodeNotFound(node: .MethodResponse))
             }
 
             let fault = xmlResponse[.Fault]
-            guard fault.error == nil else {
-                return .Failure(.Fault(node: XMLRPCNode(xml: fault)))
+            guard fault.error != nil else {
+                return .Failure(.Fault(node: XMLRPCNode(xml: fault[.Value])))
             }
 
             let params = xmlResponse[.Parameters]
