@@ -32,7 +32,7 @@ public struct XMLRPCNode {
 
 // MARK: - Array
 // TODO: Implement collection type
-extension XMLRPCNode {
+extension XMLRPCNode: CollectionType {
     public var array: [XMLRPCNode]? {
         if let children = xml.rpcChildren {
             return children.map { e in
@@ -46,8 +46,12 @@ extension XMLRPCNode {
         return nil
     }
 
-    public var count: Int? {
-        return xml.rpcChildren?.count
+    public var startIndex: Int {
+        return 0
+    }
+
+    public var endIndex: Int {
+        return xml.rpcChildren?.count ?? 0
     }
 
     public subscript(key: Int) -> XMLRPCNode {

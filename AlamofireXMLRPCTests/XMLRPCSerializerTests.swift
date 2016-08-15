@@ -96,6 +96,11 @@ class XMLRPCSerializerTests: XCTestCase {
         XCTAssertEqual(node[1].double, 1.61)
         XCTAssertNotNil(node["aKey"].error)
 
+        var counter = 0
+        for _ in node {
+            counter += 1
+        }
+        XCTAssertEqual(counter, 2)
     }
 
     func testFault() {
