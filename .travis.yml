@@ -1,5 +1,2 @@
 language: swift
-before_install:
-- brew update
-- brew install xctool
 script: xctool -workspace AlamofireXMLRPC.xcworkspace -scheme AlamofireXMLRPC test
