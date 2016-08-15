@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "AlamofireXMLRPC"
-  s.version      = "1.0.0"
+  s.version      = "2.0.0"
   s.summary      = "AlamofireXMLRPC aims to provide an easy way to perform call on XML RPC service and allows to retrieve smoothly the response"
   s.homepage     = "https://github.com/kodlian/AlamofireXMLRPC"
 
