@@ -1,4 +1,5 @@
 language: swift
 before_install:
-   gem install cocoapods
+  - gem install activesupport -v 4.2.6
+  - gem install cocoapods
 script: xctool -workspace AlamofireXMLRPC.xcworkspace -scheme AlamofireXMLRPC test
