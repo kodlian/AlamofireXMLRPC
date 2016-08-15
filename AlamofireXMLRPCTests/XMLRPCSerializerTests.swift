@@ -74,6 +74,7 @@ class XMLRPCSerializerTests: XCTestCase {
         XCTAssertEqual(node["name"].string, "John Doe")
         XCTAssertEqual(node["age"].int32, 32)
         XCTAssertNil(node["notExist"].string)
+        XCTAssertNotNil(node[0].error)
 
     }
 
@@ -93,6 +94,8 @@ class XMLRPCSerializerTests: XCTestCase {
 
         XCTAssertEqual(node[0].int32, 42)
         XCTAssertEqual(node[1].double, 1.61)
+        XCTAssertNotNil(node["aKey"].error)
+
     }
 
     func testFault() {

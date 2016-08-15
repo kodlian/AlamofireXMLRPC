@@ -33,7 +33,7 @@ extension XMLRPCValueKind {
         if let kind = XMLRPCValueKind(rawValue: xml.name) {
             self = kind
         } else {
-            switch (xml.name, xml.count) {
+            switch (xml.name, xml.children.count) {
             case (XMLRPCNodeKind.Value.rawValue, 0):
                 self = .String
 

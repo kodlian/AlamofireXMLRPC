@@ -11,8 +11,11 @@ import AEXML
 
 // MARK: - XMLRPCNode
 public struct XMLRPCNode {
-
-    static var errorNode = XMLRPCNode(xml: AEXMLElement())
+    static var errorNode: XMLRPCNode = {
+        let xml = AEXMLElement()
+        xml.error = .ElementNotFound
+        return XMLRPCNode(xml: xml)
+    }()
 
     var xml: AEXMLElement
 
@@ -123,4 +126,7 @@ extension XMLRPCNode {
         return NSData(base64EncodedString: rawData, options: .IgnoreUnknownCharacters)
     }
 
+    public var error: AEXMLElement.Error? {
+        return xml.error
+    }
 }

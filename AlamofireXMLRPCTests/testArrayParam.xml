@@ -2,7 +2,7 @@
 <methodResponse>
     <params>
         <param>
-            <string>Hello</string>
+            <value>Hello</value>
         </param>
         <param>
             <value>
