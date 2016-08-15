@@ -2,4 +2,4 @@ language: swift
 before_install:
   - gem install activesupport -v 4.2.6
   - gem install cocoapods
-script: xctool -workspace AlamofireXMLRPC.xcworkspace -scheme AlamofireXMLRPC test
+script: xctool -workspace AlamofireXMLRPC.xcworkspace -scheme Pods-AlamofireXMLRPC test
