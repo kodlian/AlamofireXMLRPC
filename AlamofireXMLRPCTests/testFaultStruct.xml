@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<methodResponse>
+    <fault>
+        <value>
+            <struct>
+                <member>
+                    <name>code</name>
+                    <value><int>26</int></value>
+                </member>
+                
+                <member>
+                    <name>message</name>
+                    <value><string>No such method!</string></value>
+                </member>
+                
+            </struct>
+        </value>
+    </fault>
+</methodResponse>

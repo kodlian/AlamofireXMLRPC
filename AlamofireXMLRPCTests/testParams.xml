@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<methodResponse>
+    <params>
+        <param>
+            <string>Hello</string>
+        </param>
+        <param>
+            <value><string>Hello Again</string></value>
+        </param>
+        <param>
+            <value><int>42</int></value>
+        </param>
+        <param>
+            <value><i4>42</i4></value>
+        </param>
+        <param>
+            <value><double>3.14</double></value>
+        </param>
+        <param>
+            <value><boolean>1</boolean></value>
+        </param>
+        <param>
+           <value><dateTime.iso8601>20020104T17:27:30</dateTime.iso8601></value>
+        </param>
+        <param>
+            <value><base64>VmFsYXIgbW9yZ2h1bGlz</base64></value>
+        </param>
+    </params>
+</methodResponse>

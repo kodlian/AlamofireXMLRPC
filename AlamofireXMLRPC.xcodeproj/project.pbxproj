@@ -12,6 +12,12 @@
 		3F17802B1BC6DC0100DFDB76 /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17802A1BC6DC0100DFDB76 /* XML.swift */; };
 		3F17802D1BC7008B00DFDB76 /* Alamofire+XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17802C1BC7008B00DFDB76 /* Alamofire+XML.swift */; };
 		3F93F38E1D61BE74002B4D50 /* XMLRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93F38D1D61BE74002B4D50 /* XMLRPCError.swift */; };
+		3F93F3901D61DA92002B4D50 /* XMLRPCSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93F38F1D61DA92002B4D50 /* XMLRPCSerializerTests.swift */; };
+		3F93F3921D61DACE002B4D50 /* testFault.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F3911D61DACE002B4D50 /* testFault.xml */; };
+		3F93F3961D620A47002B4D50 /* testFaultStruct.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F3951D620A47002B4D50 /* testFaultStruct.xml */; };
+		3F93F3981D620B50002B4D50 /* testParams.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F3971D620B50002B4D50 /* testParams.xml */; };
+		3F93F39A1D62103F002B4D50 /* testStructParam.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F3991D62103F002B4D50 /* testStructParam.xml */; };
+		3F93F39C1D621163002B4D50 /* testArrayParam.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F39B1D621163002B4D50 /* testArrayParam.xml */; };
 		3FF3D54F1BC81FA300599A37 /* AlamofireXMLRPCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3D54E1BC81FA300599A37 /* AlamofireXMLRPCTests.swift */; };
 		3FF3D5511BC81FA300599A37 /* AlamofireXMLRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6306821C1BC27C28005D7BC8 /* AlamofireXMLRPC.framework */; };
 		630682201BC27C28005D7BC8 /* AlamofireXMLRPC.h in Headers */ = {isa = PBXBuildFile; fileRef = 6306821F1BC27C28005D7BC8 /* AlamofireXMLRPC.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,6 +43,12 @@
 		3F17802A1BC6DC0100DFDB76 /* XML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.swift; sourceTree = "<group>"; };
 		3F17802C1BC7008B00DFDB76 /* Alamofire+XML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire+XML.swift"; sourceTree = "<group>"; };
 		3F93F38D1D61BE74002B4D50 /* XMLRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLRPCError.swift; sourceTree = "<group>"; };
+		3F93F38F1D61DA92002B4D50 /* XMLRPCSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLRPCSerializerTests.swift; sourceTree = "<group>"; };
+		3F93F3911D61DACE002B4D50 /* testFault.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testFault.xml; sourceTree = "<group>"; };
+		3F93F3951D620A47002B4D50 /* testFaultStruct.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testFaultStruct.xml; sourceTree = "<group>"; };
+		3F93F3971D620B50002B4D50 /* testParams.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testParams.xml; sourceTree = "<group>"; };
+		3F93F3991D62103F002B4D50 /* testStructParam.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testStructParam.xml; sourceTree = "<group>"; };
+		3F93F39B1D621163002B4D50 /* testArrayParam.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testArrayParam.xml; sourceTree = "<group>"; };
 		3FF3D54C1BC81FA300599A37 /* AlamofireXMLRPCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlamofireXMLRPCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FF3D54E1BC81FA300599A37 /* AlamofireXMLRPCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireXMLRPCTests.swift; sourceTree = "<group>"; };
 		3FF3D5501BC81FA300599A37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,6 +87,12 @@
 			children = (
 				3FF3D54E1BC81FA300599A37 /* AlamofireXMLRPCTests.swift */,
 				3FF3D5501BC81FA300599A37 /* Info.plist */,
+				3F93F38F1D61DA92002B4D50 /* XMLRPCSerializerTests.swift */,
+				3F93F3991D62103F002B4D50 /* testStructParam.xml */,
+				3F93F39B1D621163002B4D50 /* testArrayParam.xml */,
+				3F93F3971D620B50002B4D50 /* testParams.xml */,
+				3F93F3911D61DACE002B4D50 /* testFault.xml */,
+				3F93F3951D620A47002B4D50 /* testFaultStruct.xml */,
 			);
 			path = AlamofireXMLRPCTests;
 			sourceTree = "<group>";
@@ -229,6 +247,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F93F3981D620B50002B4D50 /* testParams.xml in Resources */,
+				3F93F39A1D62103F002B4D50 /* testStructParam.xml in Resources */,
+				3F93F3921D61DACE002B4D50 /* testFault.xml in Resources */,
+				3F93F3961D620A47002B4D50 /* testFaultStruct.xml in Resources */,
+				3F93F39C1D621163002B4D50 /* testArrayParam.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FF3D54F1BC81FA300599A37 /* AlamofireXMLRPCTests.swift in Sources */,
+				3F93F3901D61DA92002B4D50 /* XMLRPCSerializerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<methodResponse>
+    <fault>
+        <value><string>No such method!</string></value>
+    </fault>
+</methodResponse>

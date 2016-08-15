@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<methodResponse>
+    <params>
+        <param>
+            <string>Hello</string>
+        </param>
+        <param>
+            <value>
+                <array>
+                    <data>
+                        <value><i4>42</i4></value>
+                        <value><double>1.61</double></value>
+                    </data>
+                </array>
+            </value>
+        </param>
+    </params>
+</methodResponse>

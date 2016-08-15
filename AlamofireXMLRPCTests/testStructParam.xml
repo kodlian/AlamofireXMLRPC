@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<methodResponse>
+    <params>
+        <param>
+            <string>Hello</string>
+        </param>
+        <param>
+            <value>
+                <struct>
+                    <member>
+                        <name>name</name>
+                        <value><string>John Doe</string></value>
+                    </member>
+                    <member>
+                        <name>age</name>
+                        <value><int>32</int></value>
+                    </member>
+                </struct>
+            </value>
+        </param>
+    </params>
+</methodResponse>
