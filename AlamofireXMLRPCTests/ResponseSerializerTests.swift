@@ -10,7 +10,7 @@ import XCTest
 @testable import AlamofireXMLRPC
 import Alamofire
 
-class XMLRPCSerializerTests: XCTestCase {
+class ResponseSerializerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
@@ -23,7 +23,7 @@ class XMLRPCSerializerTests: XCTestCase {
     }
 
     private func serialize(name: String) -> Result<XMLRPCNode, XMLRPCError> {
-        let path = NSBundle(forClass: XMLRPCSerializerTests.self).pathForResource(name, ofType: "xml", inDirectory: nil)!
+        let path = NSBundle(forClass: ResponseSerializerTests.self).pathForResource(name, ofType: "xml", inDirectory: nil)!
         return Request.XMLRPCResponseSerializer().serializeResponse(nil, nil, NSData(contentsOfFile: path), nil)
     }
 
