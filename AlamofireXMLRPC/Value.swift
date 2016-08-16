@@ -49,10 +49,14 @@ extension String: XMLRPCRawValueRepresentable {
 }
 
 // MARK: Bool
-extension Bool: XMLRPCRawValueRepresentable {
+extension XMLRPCRawValueRepresentable where Self: BooleanType {
     public static var xmlrpcKind: XMLRPCValueKind { return .Boolean }
+    public var xmlrpcRawValue: String { return self.boolValue ? "1" : "0" }
+}
+
+extension Bool: XMLRPCRawValueRepresentable {
     public init?(xmlrpcRawValue: String) {
-        self = Int8(xmlrpcRawValue) == 1
+        self.init(Int8(xmlrpcRawValue) == 1)
     }
 }
 
