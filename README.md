@@ -116,9 +116,9 @@ end
 ### Method request
 ```swift
 // Call XMLRPC service with the sharedManager of Alamofire
-AlamofireXMLRPC.request("https://xmlrpcservice", method:"foo" parameters: [1,2.0,"ddd",["key":"value"]])
+AlamofireXMLRPC.request("https://xmlrpcservice", method:"foo" parameters: [1,2.0,"ddd",["key":"value"] as XMLRPCStructure])
 // Call XMLRPC service with your custom manager
-manager.requestXMLRPC("https://xmlrpcservice", method:"foo" parameters: [1,2.0,"ddd",["key":"value"]])
+manager.requestXMLRPC("https://xmlrpcservice", method:"foo" parameters: [1,2.0,"ddd",["key":"value"] as XMLRPCStructure])
 ```
 
 ### XMLRPC Request convertible
@@ -226,5 +226,4 @@ var count: Int?
 AlamofireXMLRPC is released under the MIT license. See [LICENSE](LICENSE) for details.
 
 ## TO DO
-- XMLRPCNode enumeration
 - Find a way to avoid to cast array and dictionary for value mapping
