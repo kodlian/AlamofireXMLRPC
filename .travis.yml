@@ -1,6 +1,9 @@
 language: objective-c
 osx_image: xcode7.3
-before_install:
-  - gem install activesupport -v 4.2.6
-  - gem install cocoapods
-script: xctool -workspace AlamofireXMLRPC.xcworkspace sdk macosx10.11 -scheme AlamofireXMLRPC test
+cache:
+- bundler
+- cocoapods
+xcode_workspace: AlamofireXMLRPC.xcworkspace
+xcode_scheme: AlamofireXMLRPC
+after_success:
+- bash <(curl -s https://codecov.io/bash) -J 'AlamofireXMLRPC'
