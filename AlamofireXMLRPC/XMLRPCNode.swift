@@ -134,3 +134,9 @@ extension XMLRPCNode {
         return xml.error
     }
 }
+
+extension XMLRPCNode: CustomStringConvertible {
+    var description: String {
+        return xml.value ?? ""
+    }
+}
