@@ -11,5 +11,6 @@ end
 
 
 target 'AlamofireXMLRPCTests' do
-    
+    pod 'AEXML', :git => "https://github.com/tadija/AEXML.git"
+    pod 'Alamofire', :git => "https://github.com/Alamofire/Alamofire.git"
 end
