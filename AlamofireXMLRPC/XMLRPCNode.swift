@@ -136,7 +136,7 @@ extension XMLRPCNode {
 }
 
 extension XMLRPCNode: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         return xml.value ?? ""
     }
 }
