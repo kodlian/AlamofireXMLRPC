@@ -37,6 +37,11 @@
                BlueprintName = "AlamofireXMLRPCTests"
                ReferencedContainer = "container:AlamofireXMLRPC.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "AlamofireXMLRPCTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
