@@ -10,7 +10,6 @@
 [![Issues](https://img.shields.io/github/issues/kodlian/AlamofireXMLRPC.svg?style=flat
                         )](https://github.com/kodlian/AlamofireXMLRPC/issues)
 [![Cocoapod](http://img.shields.io/cocoapods/v/AlamofireXMLRPC.svg?style=flat)](http://cocoadocs.org/docsets/AlamofireXMLRPC/)
-
 [![Build Status](https://travis-ci.org/kodlian/AlamofireXMLRPC.svg?branch=master)](https://travis-ci.org/kodlian/AlamofireXMLRPC)
 
 AlamofireXMLRPC brings [XML RPC](http://xmlrpc.scripting.com/) functionalities to [Alamofire](https://github.com/Alamofire/Alamofire). It aims to provide an easy way to perform XMLRPC call and to retrieve smoothly the response.
