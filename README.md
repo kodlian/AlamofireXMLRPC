@@ -193,7 +193,7 @@ XMLRPC Responses are handled with the method ```responseXMLRPC(completionHandler
 For each XMLRPCNode you can access subnode by index or by String key. Internally children of XMLRPC Array and Structure will be fetched.
 
 ```swift
-aRequest.responseXMLRPC{ (response:Response<XMLRPCNode, XMRLRPCError>) -> Void in
+aRequest.responseXMLRPC{ (response:Response<XMLRPCNode, XMLRPCError>) -> Void in
       guard let value = response.result.value where response.result.isSuccess else {
         return
       }
