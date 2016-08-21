@@ -107,18 +107,18 @@ extension XMLRPCNode {
     public var bool: Bool? { return value() }
 
     public func value<V: XMLRPCRawValueRepresentable>() -> V? {
-        guard let value = xml.value, nodeKind = XMLRPCValueKind(xml: xml) where nodeKind == V.xmlrpcKind else {
+        guard let value = xml.value, nodeKind = XMLRPCValueKind(xml: xml) where nodeKind == V.xmlRpcKind else {
             return nil
         }
 
-        return V(xmlrpcRawValue: value)
+        return V(xmlRpcRawValue: value)
     }
 
     public var date: NSDate? {
         guard let rawData = xml.value, nodeKind = XMLRPCValueKind(xml: xml) where nodeKind == XMLRPCValueKind.DateTime else {
             return nil
         }
-        // TODO: Move Code - We able to Implement intializer init?(xmlrpcRawValue: String)  in swift 3 in NSDate extension
+        // TODO: Move Code - We able to Implement intializer init?(xmlRpcRawValue: String)  in swift 3 in NSDate extension
         return iso8601DateFormatter.dateFromString(rawData)
     }
 
@@ -126,7 +126,7 @@ extension XMLRPCNode {
         guard let rawData = xml.value, nodeKind = XMLRPCValueKind(xml: xml) where nodeKind == XMLRPCValueKind.Base64 else {
             return nil
         }
-        // TODO: Move Code - We able to Implement intializer init?(xmlrpcRawValue: String)  in swift 3 in NSData extension
+        // TODO: Move Code - We able to Implement intializer init?(xmlRpcRawValue: String)  in swift 3 in NSData extension
         return NSData(base64EncodedString: rawData, options: .IgnoreUnknownCharacters)
     }
 

@@ -18,51 +18,51 @@ public enum XMLRPCValueKind: String {
 }
 
 public protocol XMLRPCRawValueRepresentable {
-    static var xmlrpcKind: XMLRPCValueKind { get }
-    var xmlrpcRawValue: String { get }
-    init?(xmlrpcRawValue: String)
+    static var xmlRpcKind: XMLRPCValueKind { get }
+    var xmlRpcRawValue: String { get }
+    init?(xmlRpcRawValue: String)
 }
 
 
 public extension XMLRPCRawValueRepresentable {
-    static var xmlrpcKind: XMLRPCValueKind { return .String }
-    var xmlrpcRawValue: String { return String(self) }
-    init?(xmlrpcRawValue: String) {
+    static var xmlRpcKind: XMLRPCValueKind { return .String }
+    var xmlRpcRawValue: String { return String(self) }
+    init?(xmlRpcRawValue: String) {
         return nil
     }
 }
 
 public extension RawRepresentable where RawValue == String, Self: XMLRPCRawValueRepresentable {
-    init?(xmlrpcRawValue: String) {
-        self.init(rawValue: xmlrpcRawValue)
+    init?(xmlRpcRawValue: String) {
+        self.init(rawValue: xmlRpcRawValue)
     }
-    var xmlrpcRawValue: String { return rawValue }
+    var xmlRpcRawValue: String { return rawValue }
 }
 
 // MARK: String
 extension String: XMLRPCRawValueRepresentable {
-    public static var xmlrpcKind: XMLRPCValueKind { return .String }
-    public var xmlrpcRawValue: String { return self }
-    public init?(xmlrpcRawValue: String) {
-        self = xmlrpcRawValue
+    public static var xmlRpcKind: XMLRPCValueKind { return .String }
+    public var xmlRpcRawValue: String { return self }
+    public init?(xmlRpcRawValue: String) {
+        self = xmlRpcRawValue
     }
 }
 
 // MARK: Bool
 extension XMLRPCRawValueRepresentable where Self: BooleanType {
-    public static var xmlrpcKind: XMLRPCValueKind { return .Boolean }
-    public var xmlrpcRawValue: String { return self.boolValue ? "1" : "0" }
+    public static var xmlRpcKind: XMLRPCValueKind { return .Boolean }
+    public var xmlRpcRawValue: String { return self.boolValue ? "1" : "0" }
 }
 
 extension Bool: XMLRPCRawValueRepresentable {
-    public init?(xmlrpcRawValue: String) {
-        self.init(Int8(xmlrpcRawValue) == 1)
+    public init?(xmlRpcRawValue: String) {
+        self.init(Int8(xmlRpcRawValue) == 1)
     }
 }
 
 // MARK: Integer
 extension XMLRPCRawValueRepresentable where Self: IntegerType {
-    public static var xmlrpcKind: XMLRPCValueKind { return .Integer }
+    public static var xmlRpcKind: XMLRPCValueKind { return .Integer }
 }
 
 public protocol StringRadixParsable {
@@ -70,8 +70,8 @@ public protocol StringRadixParsable {
 }
 
 extension XMLRPCRawValueRepresentable where Self: StringRadixParsable {
-    public init?(xmlrpcRawValue: String) {
-        self.init(xmlrpcRawValue, radix: 10)
+    public init?(xmlRpcRawValue: String) {
+        self.init(xmlRpcRawValue, radix: 10)
     }
 }
 
@@ -83,7 +83,7 @@ extension UInt8: StringRadixParsable { }
 
 
 extension Int: XMLRPCRawValueRepresentable {
-    public var xmlrpcRawValue: String { return String(Int32(self))} // Truncate Int
+    public var xmlRpcRawValue: String { return String(Int32(self))} // Truncate Int
 }
 extension Int32: XMLRPCRawValueRepresentable { }
 extension Int16: XMLRPCRawValueRepresentable { }
@@ -94,17 +94,17 @@ extension UInt8: XMLRPCRawValueRepresentable { }
 
 // MARK: Floating Point
 public extension XMLRPCRawValueRepresentable where Self: FloatingPointType {
-    public static var xmlrpcKind: XMLRPCValueKind { return .Double }
+    public static var xmlRpcKind: XMLRPCValueKind { return .Double }
 }
 
 extension Double: XMLRPCRawValueRepresentable {
-    public init?(xmlrpcRawValue: String) {
-        self.init(xmlrpcRawValue)
+    public init?(xmlRpcRawValue: String) {
+        self.init(xmlRpcRawValue)
     }
 }
 extension Float: XMLRPCRawValueRepresentable {
-    public init?(xmlrpcRawValue: String) {
-      self.init(xmlrpcRawValue)
+    public init?(xmlRpcRawValue: String) {
+      self.init(xmlRpcRawValue)
     }
 }
 
@@ -124,16 +124,16 @@ extension NSDate {
     }
 }
 extension NSDate: XMLRPCRawValueRepresentable {
-    public static var xmlrpcKind: XMLRPCValueKind { return .DateTime }
-    public var xmlrpcRawValue: String {
+    public static var xmlRpcKind: XMLRPCValueKind { return .DateTime }
+    public var xmlRpcRawValue: String {
         return self.iso8601String
     }
 }
 
 // MARK: Data
 extension NSData: XMLRPCRawValueRepresentable {
-    public static var xmlrpcKind: XMLRPCValueKind { return .Base64 }
-    public var xmlrpcRawValue: String {
+    public static var xmlRpcKind: XMLRPCValueKind { return .Base64 }
+    public var xmlRpcRawValue: String {
         return self.base64EncodedStringWithOptions([])
     }
 }

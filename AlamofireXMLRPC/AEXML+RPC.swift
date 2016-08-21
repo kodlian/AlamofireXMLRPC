@@ -73,21 +73,21 @@ extension AEXMLElement {
 
     convenience init(_  rpcValue: XMLRPCRawValueRepresentable) {
         self.init()
-        name = rpcValue.dynamicType.xmlrpcKind.rawValue
-        value = rpcValue.xmlrpcRawValue
+        name = rpcValue.dynamicType.xmlRpcKind.rawValue
+        value = rpcValue.xmlRpcRawValue
     }
 
     func addChild(rpcValue rpcValue: XMLRPCRawValueRepresentable) -> AEXMLElement {
-        return addChild(name: rpcValue.dynamicType.xmlrpcKind.rawValue, value: rpcValue.xmlrpcRawValue)
+        return addChild(name: rpcValue.dynamicType.xmlRpcKind.rawValue, value: rpcValue.xmlRpcRawValue)
     }
 }
 
 struct UnknownRPCValue: XMLRPCRawValueRepresentable {
-    static var xmlrpcKind: XMLRPCValueKind { return .String }
-    private(set) var xmlrpcRawValue: String
+    static var xmlRpcKind: XMLRPCValueKind { return .String }
+    private(set) var xmlRpcRawValue: String
 
     init(_ value: Any) {
-        xmlrpcRawValue = String(value)
+        xmlRpcRawValue = String(value)
     }
 }
 
