@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "AlamofireXMLRPC"
-  s.version      = "2.0.0"
+  s.version      = "2.1.0"
   s.summary      = "AlamofireXMLRPC brings XMLRPC functionalities to Alamofire."
   s.description  = "AlamofireXMLRPC brings XMLRPC functionalities to Alamofire. It aims to provide an easy way to perform XMLRPC call and to retrieve smoothly the response."
   s.homepage     = "https://github.com/kodlian/AlamofireXMLRPC"
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   #  When using multiple platforms
   s.ios.deployment_target = "8.0"
-  s.osx.deployment_target = "10.10"
+  s.osx.deployment_target = "10.11"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.source       = { :git => "https://github.com/kodlian/AlamofireXMLRPC.git", :tag => "2.0.0" }
