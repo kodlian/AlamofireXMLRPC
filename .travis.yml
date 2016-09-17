@@ -4,6 +4,6 @@ cache:
 - bundler
 - cocoapods
 script:
-- xcodebuild -scheme AlamofireXMLRPC -workspace AlamofireXMLRPC.xcworkspace -sdk macosx10.11 build test
+- xcodebuild -scheme AlamofireXMLRPC -workspace AlamofireXMLRPC.xcworkspace -sdk macosx10.12 build test
 after_success:
 - bash <(curl -s https://codecov.io/bash) -J 'AlamofireXMLRPC'
