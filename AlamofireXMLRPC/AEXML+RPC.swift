@@ -10,21 +10,21 @@ import Foundation
 import AEXML
 
 public enum XMLRPCNodeKind: String {
-    case MethodCall = "methodCall"
-    case MethodName = "methodName"
-    case MethodResponse = "methodResponse"
-    case Fault = "fault"
-    case Structure = "struct"
-    case Member = "member"
+    case methodCall = "methodCall"
+    case methodName = "methodName"
+    case methodResponse = "methodResponse"
+    case fault = "fault"
+    case structure = "struct"
+    case member = "member"
 
-    case Parameters = "params"
-    case Parameter = "param"
+    case parameters = "params"
+    case parameter = "param"
 
-    case Array = "array"
-    case Data = "data"
+    case array = "array"
+    case data = "data"
 
-    case Value = "value"
-    case Name = "name"
+    case value = "value"
+    case name = "name"
 }
 
 extension XMLRPCValueKind {
@@ -34,7 +34,7 @@ extension XMLRPCValueKind {
             self = kind
         } else {
             switch (xml.name, xml.children.count) {
-            case (XMLRPCNodeKind.Value.rawValue, 0):
+            case (XMLRPCNodeKind.value.rawValue, 0):
                 self = .String
 
             case ("i4",_):
@@ -54,11 +54,10 @@ extension AEXMLElement {
     var rpcNode: XMLRPCNodeKind? { return XMLRPCNodeKind(rawValue: name) }
 
     convenience init(rpcNode: XMLRPCNodeKind) {
-        self.init()
-        name = rpcNode.rawValue
+        self.init(name: rpcNode.rawValue)
     }
 
-    func addChild(rpcNode rpcNode: XMLRPCNodeKind, value: String? = nil) -> AEXMLElement {
+    @discardableResult func addChild(rpcNode: XMLRPCNodeKind, value: String? = nil) -> AEXMLElement {
         return addChild(name: rpcNode.rawValue, value: value)
     }
 
@@ -72,22 +71,22 @@ extension AEXMLElement {
  //   var rpcValueKind: XMLRPCValueKind? { return XMLRPCValueKind(rawValue: name) }
 
     convenience init(_  rpcValue: XMLRPCRawValueRepresentable) {
-        self.init()
-        name = rpcValue.dynamicType.xmlRpcKind.rawValue
+        self.init(name: type(of: rpcValue).xmlRpcKind.rawValue)
+        name = type(of: rpcValue).xmlRpcKind.rawValue
         value = rpcValue.xmlRpcRawValue
     }
 
-    func addChild(rpcValue rpcValue: XMLRPCRawValueRepresentable) -> AEXMLElement {
-        return addChild(name: rpcValue.dynamicType.xmlRpcKind.rawValue, value: rpcValue.xmlRpcRawValue)
+    @discardableResult func addChild(rpcValue: XMLRPCRawValueRepresentable) -> AEXMLElement {
+        return addChild(name: type(of: rpcValue).xmlRpcKind.rawValue, value: rpcValue.xmlRpcRawValue)
     }
 }
 
 struct UnknownRPCValue: XMLRPCRawValueRepresentable {
     static var xmlRpcKind: XMLRPCValueKind { return .String }
-    private(set) var xmlRpcRawValue: String
+    fileprivate(set) var xmlRpcRawValue: String
 
     init(_ value: Any) {
-        xmlRpcRawValue = String(value)
+        xmlRpcRawValue = String(describing: value)
     }
 }
 
@@ -100,8 +99,8 @@ extension Dictionary: XMLRPCStructureType { }
 
 
 extension AEXMLElement {
-    private func addRPCValue(value: Any) {
-        let xmlValue = addChild(rpcNode:XMLRPCNodeKind.Value)
+    fileprivate func addRPCValue(_ value: Any) {
+        let xmlValue = addChild(rpcNode:XMLRPCNodeKind.value)
         switch value {
         case let v as XMLRPCRawValueRepresentable:
             xmlValue.addChild(rpcValue:v)
@@ -120,37 +119,37 @@ extension AEXMLElement {
     }
 
     convenience init(rpcArray: [Any]) {
-        self.init(rpcNode: XMLRPCNodeKind.Array)
+        self.init(rpcNode: XMLRPCNodeKind.array)
 
-        let xmlElement = addChild(rpcNode: XMLRPCNodeKind.Data)
+        let xmlElement = addChild(rpcNode: XMLRPCNodeKind.data)
         for element in rpcArray {
             xmlElement.addRPCValue(element)
         }
     }
     convenience init(rpcParams: [Any]) {
-        self.init(rpcNode: XMLRPCNodeKind.Parameters)
+        self.init(rpcNode: XMLRPCNodeKind.parameters)
 
         for item in rpcParams {
-            addChild(rpcNode: .Parameter).addRPCValue(item)
+            addChild(rpcNode: .parameter).addRPCValue(item)
         }
     }
 
     convenience init(rpcStructure: [String:Any]) {
-        self.init(rpcNode: XMLRPCNodeKind.Structure)
+        self.init(rpcNode: XMLRPCNodeKind.structure)
 
         for (key, value) in rpcStructure {
-            let member = addChild(rpcNode: XMLRPCNodeKind.Member)
-            member.addChild(rpcNode: XMLRPCNodeKind.Name, value: key)
+            let member = addChild(rpcNode: XMLRPCNodeKind.member)
+            member.addChild(rpcNode: XMLRPCNodeKind.name, value: key)
             member.addRPCValue(value)
         }
     }
 
     var rpcChildren: [AEXMLElement]? {
-        guard rpcNode == XMLRPCNodeKind.Array || rpcNode == XMLRPCNodeKind.Parameters else {
+        guard rpcNode == XMLRPCNodeKind.array || rpcNode == XMLRPCNodeKind.parameters else {
             return nil
         }
 
-        return rpcNode == XMLRPCNodeKind.Array ? self[.Data].children : children
+        return rpcNode == XMLRPCNodeKind.array ? self[.data].children : children
     }
 
 

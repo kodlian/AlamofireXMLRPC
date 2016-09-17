@@ -26,7 +26,7 @@ public protocol XMLRPCRawValueRepresentable {
 
 public extension XMLRPCRawValueRepresentable {
     static var xmlRpcKind: XMLRPCValueKind { return .String }
-    var xmlRpcRawValue: String { return String(self) }
+    var xmlRpcRawValue: String { return String(describing: self) }
     init?(xmlRpcRawValue: String) {
         return nil
     }
@@ -49,19 +49,16 @@ extension String: XMLRPCRawValueRepresentable {
 }
 
 // MARK: Bool
-extension XMLRPCRawValueRepresentable where Self: BooleanType {
-    public static var xmlRpcKind: XMLRPCValueKind { return .Boolean }
-    public var xmlRpcRawValue: String { return self.boolValue ? "1" : "0" }
-}
-
 extension Bool: XMLRPCRawValueRepresentable {
+    public static var xmlRpcKind: XMLRPCValueKind { return .Boolean }
+    public var xmlRpcRawValue: String { return self ? "1" : "0" }
     public init?(xmlRpcRawValue: String) {
         self.init(Int8(xmlRpcRawValue) == 1)
     }
 }
 
 // MARK: Integer
-extension XMLRPCRawValueRepresentable where Self: IntegerType {
+extension XMLRPCRawValueRepresentable where Self: Integer {
     public static var xmlRpcKind: XMLRPCValueKind { return .Integer }
 }
 
@@ -91,50 +88,58 @@ extension Int8: XMLRPCRawValueRepresentable { }
 extension UInt16: XMLRPCRawValueRepresentable { }
 extension UInt8: XMLRPCRawValueRepresentable { }
 
-
 // MARK: Floating Point
-public extension XMLRPCRawValueRepresentable where Self: FloatingPointType {
-    public static var xmlRpcKind: XMLRPCValueKind { return .Double }
-}
-
-extension Double: XMLRPCRawValueRepresentable {
+public extension XMLRPCRawValueRepresentable where Self: LosslessStringConvertible {
     public init?(xmlRpcRawValue: String) {
         self.init(xmlRpcRawValue)
     }
 }
-extension Float: XMLRPCRawValueRepresentable {
-    public init?(xmlRpcRawValue: String) {
-      self.init(xmlRpcRawValue)
-    }
+
+public extension XMLRPCRawValueRepresentable where Self: FloatingPoint {
+    public static var xmlRpcKind: XMLRPCValueKind { return .Double }
 }
 
+extension Double: XMLRPCRawValueRepresentable { }
+extension Float: XMLRPCRawValueRepresentable { }
 
 // MARK: Date
-let iso8601DateFormatter: NSDateFormatter = {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "GMT")
+let iso8601DateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.dateFormat = "yyyyMMdd'T'HH:mm:ss"
         return dateFormatter
 }()
 
-extension NSDate {
+extension Date {
     var iso8601String: String {
-        return iso8601DateFormatter.stringFromDate(self)
+        return iso8601DateFormatter.string(from: self)
     }
 }
-extension NSDate: XMLRPCRawValueRepresentable {
+extension Date: XMLRPCRawValueRepresentable {
     public static var xmlRpcKind: XMLRPCValueKind { return .DateTime }
     public var xmlRpcRawValue: String {
         return self.iso8601String
     }
+    public init?(xmlRpcRawValue: String) {
+        guard let date = iso8601DateFormatter.date(from: xmlRpcRawValue) else {
+            return nil
+        }
+        self = date
+    }
 }
 
 // MARK: Data
-extension NSData: XMLRPCRawValueRepresentable {
+extension Data: XMLRPCRawValueRepresentable {
     public static var xmlRpcKind: XMLRPCValueKind { return .Base64 }
     public var xmlRpcRawValue: String {
-        return self.base64EncodedStringWithOptions([])
+        return self.base64EncodedString(options: [])
+    }
+    public init?(xmlRpcRawValue: String) {
+        guard let data = Data(base64Encoded: xmlRpcRawValue, options: .ignoreUnknownCharacters) else {
+            return nil
+        }
+        self = data
     }
 }
 

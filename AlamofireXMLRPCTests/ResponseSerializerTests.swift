@@ -22,9 +22,10 @@ class ResponseSerializerTests: XCTestCase {
         super.tearDown()
     }
 
-    private func serialize(name: String) -> Result<XMLRPCNode, XMLRPCError> {
-        let path = NSBundle(forClass: ResponseSerializerTests.self).pathForResource(name, ofType: "xml", inDirectory: nil)!
-        return Request.XMLRPCResponseSerializer().serializeResponse(nil, nil, NSData(contentsOfFile: path), nil)
+    fileprivate func serialize(_ name: String) -> Result<XMLRPCNode> {
+        let url = Bundle(for: ResponseSerializerTests.self).url(forResource: name, withExtension: "xml", subdirectory: nil)!
+        let data = try? Data(contentsOf: url)
+        return DataRequest.XMLRPCResponseSerializer().serializeResponse(nil, nil, data, nil)
     }
 
     func testParams() {
@@ -51,10 +52,10 @@ class ResponseSerializerTests: XCTestCase {
         XCTAssertEqual(node[5].bool, true)
         XCTAssertNil(node[5].string)
 
-        XCTAssertEqual(node[6].date, iso8601DateFormatter.dateFromString("19870513T08:27:30"))
+        XCTAssertEqual(node[6].date, iso8601DateFormatter.date(from: "19870513T08:27:30"))
         XCTAssertNil(node[6].string)
 
-        XCTAssertEqual(node[7].data, "Valar morghulis".dataUsingEncoding(NSUTF8StringEncoding))
+        XCTAssertEqual(node[7].data, "Valar morghulis".data(using: String.Encoding.utf8))
         XCTAssertNil(node[7].string)
 
     }
@@ -112,7 +113,7 @@ class ResponseSerializerTests: XCTestCase {
         }
 
         switch error {
-        case .Fault(node: let node):
+        case XMLRPCError.fault(node: let node):
             XCTAssertEqual(node.string, "No such method!")
         default:
             XCTFail()
@@ -130,7 +131,7 @@ class ResponseSerializerTests: XCTestCase {
         }
 
         switch error {
-        case .Fault(node: let node):
+        case XMLRPCError.fault(node: let node):
             XCTAssertEqual(node["code"].int32, 26)
             XCTAssertEqual(node["message"].string, "No such method!")
         default:

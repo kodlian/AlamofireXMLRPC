@@ -10,28 +10,29 @@ import Foundation
 import AEXML
 import Alamofire
 
-extension Request {
-    public static func XMLResponseSerializer() -> ResponseSerializer<AEXMLDocument, NSError> {
-        return ResponseSerializer { request, response, data, error in
-            guard error == nil else { return .Failure(error!) }
+extension DataRequest {
+    public static func XMLResponseSerializer() -> DataResponseSerializer<AEXMLDocument> {
+        return DataResponseSerializer { request, response, data, error in
+            if let e = error {
+                return .failure(e)
+            }
 
             guard let validData = data else {
-                let failureReason = "Data could not be serialized. Input data was nil."
-
-                let error = NSError(domain: Error.Domain, code: Error.Code.DataSerializationFailed.rawValue, userInfo: [NSLocalizedDescriptionKey : failureReason])
-                return .Failure(error)
+                return .failure(AFError.responseValidationFailed(reason: AFError.ResponseValidationFailureReason.dataFileNil))
             }
 
             do {
-                let XML = try AEXMLDocument(xmlData: validData)
-                return .Success(XML)
+                let XML = try AEXMLDocument(xml: validData)
+                return .success(XML)
             } catch {
-                return .Failure(error as NSError)
+                return .failure(error)
             }
         }
     }
 
-    public func responseXMLDocument(completionHandler: Response<AEXMLDocument, NSError> -> Void) -> Self {
-        return response(responseSerializer: Request.XMLResponseSerializer(), completionHandler: completionHandler)
+    public func responseXMLDocument(queue: DispatchQueue? = nil,  completionHandler: @escaping (DataResponse<AEXMLDocument>) -> Void) -> Self {
+        return response(queue: queue, responseSerializer: DataRequest.XMLResponseSerializer(), completionHandler: completionHandler)
     }
 }
+
+

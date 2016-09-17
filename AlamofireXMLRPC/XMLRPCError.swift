@@ -8,9 +8,10 @@
 
 import Foundation
 
-public enum XMLRPCError: ErrorType {
-    case NetworkError(NSError?)
-    case XMLSerializationFailed
-    case NodeNotFound(node: XMLRPCNodeKind)
-    case Fault(node: XMLRPCNode)
+public enum XMLRPCError: Error {
+    case networkError(Error?)
+    case xmlSerializationFailed
+    case parseFailed
+    case nodeNotFound(node: XMLRPCNodeKind)
+    case fault(node: XMLRPCNode)
 }

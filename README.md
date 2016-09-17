@@ -19,22 +19,24 @@ XML is handled internally with [AEXML](https://github.com/tadija/AEXML).
 
 ## Example
 Take the following request and response handler:
+
 ```swift
 let data: NSData = ...
-let params: [Any] = [42, "text", 3.44, NSDate(), data]
-AlamofireXMLRPC.request("http://localhost:8888/xmlrpc", methodName: "foo", parameters: params).responseXMLRPC { (response:Response<XMLRPCNode, XMLRPCError>) -> Void in
-      guard response.result.isSuccess else {
-        ...
-        return
+let params: [Any] = [42, "text", 3.44, Date(), data]
+AlamofireXMLRPC.request("http://localhost:8888/xmlrpc", methodName: "foo", parameters: params).responseXMLRPC { (response: DataResponse<XMLRPCNode>) -> Void in
+	   switch response.result {
+      case .success(let value):
+      		if let message = value[0].string, age = value[1]["age"].int32  {
+              ...
+     		}
+      case .failure:
+            ...
       }
 
-      if let value = response.result.value, message = value[0].string, age = value[1]["age"].int32  {
-              ...
-      }
-}
 ```
 
 It will generate the following call and lets you parse the corresponding answer from the XMLRPC service:
+
 ```xml
 <!-- request -->
 <methodCall>
@@ -127,7 +129,7 @@ Types adopting the ```XMLRPCRequestConvertible``` protocol can be used to constr
 
 ```swift
 public protocol XMLRPCRequestConvertible {
-    var URLString: URLStringConvertible { get }
+    var url: URLConvertible { get }
     var methodName: String { get }
     var parameters: [Any]? { get }
     var headers: [String : String]? { get }
@@ -151,19 +153,19 @@ AlamofireXMLRPC uses the following mapping for swift values to XML RPC values:
 | Int, Int32, Int16, Int8, UInt16, UInt8 	| 42   		| ```<int>42</int>``` 						| XML RPC Integer is 32bits, Int values are converted to Int32 	|
 | Bool 						| true  	| ```<boolean>1</boolean>``` 					| 								|
 | Double, Float 				| 3.44      	| ```<double>3.44</double>```					| 								|
-| NSDate 					| NSDate() 	| ```<dateTime.iso8601>19980717T14:08:55</dateTime.iso8601>``` 	| 								|
-| NSData 					| NSData()  	| ```<base64>eW91IGNhbid0IHJlYWQgdGhpcyE=</base64>``` 		| 								|
+| Date 					| Date() 	| ```<dateTime.iso8601>19980717T14:08:55</dateTime.iso8601>``` 	| 								|
+| Data 					| Data()  	| ```<base64>eW91IGNhbid0IHJlYWQgdGhpcyE=</base64>``` 		| 								|
 
 By default other types will be mapped as XML RPC String and use the default String representation. Bu you can provide your own mapping for custom Types by adopting the protocol ```XMLRPCRawValueRepresentable```.
 
 ``` swift
 enum XMLRPCValueKind: String {
-    case Integer = "int"
-    case Double = "double"
-    case Boolean = "boolean"
-    case String = "string"
-    case DateTime = "dateTime.iso8601"
-    case Base64 = "base64"
+    case integer = "int"
+    case double = "double"
+    case boolean = "boolean"
+    case string = "string"
+    case dateTime = "dateTime.iso8601"
+    case base64 = "base64"
 }
 
 protocol XMLRPCRawValueRepresentable {
@@ -188,19 +190,20 @@ As well dictionaries ```[String:Any]``` are convertible to XMLRPC structure by c
 
 ## Response
 ### Response
-XMLRPC Responses are handled with the method ```responseXMLRPC(completionHandler: Response<XMLRPCNode, XMLRPCError> -> Void)```. The response's XMLRPC parameters are mapped to an ```XMLRPCNode```. This allows you to fetch easily data within complex structure or tree.
+XMLRPC Responses are handled with the method ```responseXMLRPC(completionHandler: DataResponse<XMLRPCNode> -> Void)```. The response's XMLRPC parameters are mapped to an ```XMLRPCNode```. This allows you to fetch easily data within complex structure or tree.
 
 #### Subscript
 For each XMLRPCNode you can access subnode by index or by String key. Internally children of XMLRPC Array and Structure will be fetched.
 
 ```swift
-aRequest.responseXMLRPC{ (response:Response<XMLRPCNode, XMLRPCError>) -> Void in
-      guard let value = response.result.value where response.result.isSuccess else {
-        return
-      }
-
-      if let message = value[0]["aKey"][9].string  {
+aRequest.responseXMLRPC{ (response: DataResponse<XMLRPCNode>) -> Void in
+      switch response.result {
+      case .success(let value):
+      		if let message = value[0]["aKey"][9].string  {
               ...
+     		}
+      case .failure:
+            ...
       }
 }
 ```
@@ -218,8 +221,8 @@ var string: String?
 var int32: Int32?
 var double: Double?
 var bool: Bool?
-var date: NSDate?
-var data: NSData?
+var date: Date?
+var data: Data?
 var count: Int?
 ```
 

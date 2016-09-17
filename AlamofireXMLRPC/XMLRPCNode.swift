@@ -12,8 +12,8 @@ import AEXML
 // MARK: - XMLRPCNode
 public struct XMLRPCNode {
     static var errorNode: XMLRPCNode = {
-        let xml = AEXMLElement()
-        xml.error = .ElementNotFound
+        let xml = AEXMLElement(name: "")
+        xml.error = .elementNotFound
         return XMLRPCNode(xml: xml)
     }()
 
@@ -21,7 +21,7 @@ public struct XMLRPCNode {
 
     init( xml rootXML: AEXMLElement) {
         var xml = rootXML
-        while (xml.rpcNode == .Value || xml.rpcNode == .Parameter) &&  xml.children.count > 0 {
+        while (xml.rpcNode == .value || xml.rpcNode == .parameter) &&  xml.children.count > 0 {
             if let child = xml.children.first {
                 xml = child
             }
@@ -31,15 +31,18 @@ public struct XMLRPCNode {
 }
 
 // MARK: - Array
-// TODO: Implement collection type
-extension XMLRPCNode: CollectionType {
+extension XMLRPCNode: Collection {
+    public func index(after i: Int) -> Int {
+        return xml.rpcChildren?.index(after: i) ?? 0
+    }
+
     public var array: [XMLRPCNode]? {
         if let children = xml.rpcChildren {
             return children.map { e in
                 if let value = e.children.first {
                     return XMLRPCNode(xml: value)
                 }
-                return self.dynamicType.errorNode
+                return type(of: self).errorNode
             }
         }
 
@@ -55,8 +58,8 @@ extension XMLRPCNode: CollectionType {
     }
 
     public subscript(key: Int) -> XMLRPCNode {
-        guard let children = xml.rpcChildren where (key >= 0 && key < children.count) else {
-            return self.dynamicType.errorNode
+        guard let children = xml.rpcChildren , (key >= 0 && key < children.count) else {
+            return type(of: self).errorNode
         }
 
         return XMLRPCNode(xml: children[key])
@@ -67,28 +70,28 @@ extension XMLRPCNode: CollectionType {
 // MARK: - Struct
 extension XMLRPCNode {
     public subscript(key: String) -> XMLRPCNode {
-        guard xml.rpcNode == XMLRPCNodeKind.Structure else {
-            return self.dynamicType.errorNode
+        guard xml.rpcNode == XMLRPCNodeKind.structure else {
+            return type(of: self).errorNode
         }
         for child in xml.children {
-            if child[XMLRPCNodeKind.Name].value == key {
-                return XMLRPCNode(xml: child[XMLRPCNodeKind.Value])
+            if child[XMLRPCNodeKind.name].value == key {
+                return XMLRPCNode(xml: child[XMLRPCNodeKind.value])
             }
         }
 
-        return self.dynamicType.errorNode
+        return type(of: self).errorNode
     }
 
     public var dictionary: [String:XMLRPCNode]? {
-        guard xml.rpcNode == XMLRPCNodeKind.Structure else {
+        guard xml.rpcNode == XMLRPCNodeKind.structure else {
             return nil
         }
 
         var dictionary = [String:XMLRPCNode]()
 
         for child in xml.children {
-            if let key = child[XMLRPCNodeKind.Name].value {
-                dictionary[key] = XMLRPCNode(xml: child[XMLRPCNodeKind.Value])
+            if let key = child[XMLRPCNodeKind.name].value {
+                dictionary[key] = XMLRPCNode(xml: child[XMLRPCNodeKind.value])
             }
         }
 
@@ -107,30 +110,18 @@ extension XMLRPCNode {
     public var bool: Bool? { return value() }
 
     public func value<V: XMLRPCRawValueRepresentable>() -> V? {
-        guard let value = xml.value, nodeKind = XMLRPCValueKind(xml: xml) where nodeKind == V.xmlRpcKind else {
+        guard let value = xml.value, let nodeKind = XMLRPCValueKind(xml: xml) , nodeKind == V.xmlRpcKind else {
             return nil
         }
 
         return V(xmlRpcRawValue: value)
     }
 
-    public var date: NSDate? {
-        guard let rawData = xml.value, nodeKind = XMLRPCValueKind(xml: xml) where nodeKind == XMLRPCValueKind.DateTime else {
-            return nil
-        }
-        // TODO: Move Code - We able to Implement intializer init?(xmlRpcRawValue: String)  in swift 3 in NSDate extension
-        return iso8601DateFormatter.dateFromString(rawData)
-    }
+    public var date: Date? { return value() }
 
-    public var data: NSData? {
-        guard let rawData = xml.value, nodeKind = XMLRPCValueKind(xml: xml) where nodeKind == XMLRPCValueKind.Base64 else {
-            return nil
-        }
-        // TODO: Move Code - We able to Implement intializer init?(xmlRpcRawValue: String)  in swift 3 in NSData extension
-        return NSData(base64EncodedString: rawData, options: .IgnoreUnknownCharacters)
-    }
+    public var data: Data? { return value() }
 
-    public var error: AEXMLElement.Error? {
+    public var error: AEXML.AEXMLError? {
         return xml.error
     }
 }

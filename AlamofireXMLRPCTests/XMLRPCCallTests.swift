@@ -28,21 +28,21 @@ class XMLRPCCallTests: XCTestCase {
             "Hello",
             42,
             3.14,
-            true, iso8601DateFormatter.dateFromString("19870513T08:27:30")!,
-            "Valar morghulis".dataUsingEncoding(NSUTF8StringEncoding)!,
+            true, iso8601DateFormatter.date(from: "19870513T08:27:30")!,
+            "Valar morghulis".data(using: String.Encoding.utf8)!,
             ["name":"John Doe"] as XMLRPCStructure
 
         ]
 
-        let path = NSBundle(forClass: XMLRPCCallTests.self).pathForResource("call", ofType: "xml", inDirectory: nil)!
+        let path = Bundle(for: XMLRPCCallTests.self).path(forResource: "call", ofType: "xml", inDirectory: nil)!
 
-        let text = try! String(contentsOfFile: path, encoding: NSUTF8StringEncoding).stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "\t\n"))
+        let text = try! String(contentsOfFile: path, encoding: String.Encoding.utf8).trimmingCharacters(in: CharacterSet(charactersIn: "\t\n"))
 
         let call = XMLRPCCallDocument(methodName: "hello", parameters: parameters)
 
-        XCTAssertEqual(call.xmlStringCompact, text)
+        XCTAssertEqual(call.xmlCompact, text)
 
-        print(call.xmlStringCompact)
+        print(call.xmlCompact)
 
     }
 

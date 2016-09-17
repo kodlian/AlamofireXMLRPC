@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3F1780291BC6D8AC00DFDB76 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1780281BC6D8AC00DFDB76 /* Value.swift */; };
 		3F17802B1BC6DC0100DFDB76 /* AEXML+RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17802A1BC6DC0100DFDB76 /* AEXML+RPC.swift */; };
-		3F17802D1BC7008B00DFDB76 /* Alamofire+XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17802C1BC7008B00DFDB76 /* Alamofire+XML.swift */; };
 		3F93F38E1D61BE74002B4D50 /* XMLRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93F38D1D61BE74002B4D50 /* XMLRPCError.swift */; };
 		3F93F3901D61DA92002B4D50 /* ResponseSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93F38F1D61DA92002B4D50 /* ResponseSerializerTests.swift */; };
 		3F93F3921D61DACE002B4D50 /* testFault.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F3911D61DACE002B4D50 /* testFault.xml */; };
@@ -21,10 +20,11 @@
 		3F93F3A01D623BFE002B4D50 /* XMLRPCCallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93F39F1D623BFE002B4D50 /* XMLRPCCallTests.swift */; };
 		3F93F3A21D623C7B002B4D50 /* call.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F3A11D623C7B002B4D50 /* call.xml */; };
 		3F93F3A41D624780002B4D50 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F3A31D624780002B4D50 /* .travis.yml */; };
+		3FE18B6E1D8DB2110054AD1A /* Alamofire+XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17802C1BC7008B00DFDB76 /* Alamofire+XML.swift */; };
+		3FE18B6F1D8DB4410054AD1A /* Alamofire+XMLRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630682271BC29885005D7BC8 /* Alamofire+XMLRPC.swift */; };
 		3FF3D54F1BC81FA300599A37 /* AlamofireXMLRPCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3D54E1BC81FA300599A37 /* AlamofireXMLRPCTests.swift */; };
 		3FF3D5511BC81FA300599A37 /* AlamofireXMLRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6306821C1BC27C28005D7BC8 /* AlamofireXMLRPC.framework */; };
 		630682201BC27C28005D7BC8 /* AlamofireXMLRPC.h in Headers */ = {isa = PBXBuildFile; fileRef = 6306821F1BC27C28005D7BC8 /* AlamofireXMLRPC.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		630682281BC29885005D7BC8 /* Alamofire+XMLRPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630682271BC29885005D7BC8 /* Alamofire+XMLRPC.swift */; };
 		67CF01F64E5D22FCBF7DE484 /* Pods_AlamofireXMLRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB4BE68C4AC30489CCE89F1 /* Pods_AlamofireXMLRPC.framework */; };
 		843298410B716B62E25F1B7A /* Pods_AlamofireXMLRPCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6974086A869525ECB87A79F5 /* Pods_AlamofireXMLRPCTests.framework */; };
 /* End PBXBuildFile section */
@@ -225,14 +225,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = kodlian;
 				TargetAttributes = {
 					3FF3D54B1BC81FA300599A37 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					6306821B1BC27C28005D7BC8 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -306,7 +308,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A1E32EF7021ACFC1B78283C3 /* [CP] Copy Pods Resources */ = {
@@ -336,7 +338,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B18820CD7B471CF827C3BA85 /* [CP] Embed Pods Frameworks */ = {
@@ -371,11 +373,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				630682281BC29885005D7BC8 /* Alamofire+XMLRPC.swift in Sources */,
 				3F93F38E1D61BE74002B4D50 /* XMLRPCError.swift in Sources */,
 				3F17802B1BC6DC0100DFDB76 /* AEXML+RPC.swift in Sources */,
+				3FE18B6F1D8DB4410054AD1A /* Alamofire+XMLRPC.swift in Sources */,
+				3FE18B6E1D8DB2110054AD1A /* Alamofire+XML.swift in Sources */,
 				3F1780291BC6D8AC00DFDB76 /* Value.swift in Sources */,
-				3F17802D1BC7008B00DFDB76 /* Alamofire+XML.swift in Sources */,
 				3F93F39E1D62288D002B4D50 /* XMLRPCNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,12 +397,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 832277C84E058678264DE9C8 /* Pods-AlamofireXMLRPCTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = AlamofireXMLRPCTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kodlian.AlamofireXMLRPCTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -408,12 +412,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 03490A74537FFB87195A71A1 /* Pods-AlamofireXMLRPCTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = AlamofireXMLRPCTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kodlian.AlamofireXMLRPCTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -430,8 +436,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -453,11 +461,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -476,8 +485,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -493,9 +504,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -515,10 +528,12 @@
 				INFOPLIST_FILE = AlamofireXMLRPC/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kodlian.AlamofireXMLRPC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -536,9 +551,11 @@
 				INFOPLIST_FILE = AlamofireXMLRPC/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kodlian.AlamofireXMLRPC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
