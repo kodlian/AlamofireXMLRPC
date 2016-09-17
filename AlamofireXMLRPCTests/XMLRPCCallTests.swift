@@ -30,7 +30,7 @@ class XMLRPCCallTests: XCTestCase {
             3.14,
             true, iso8601DateFormatter.date(from: "19870513T08:27:30")!,
             "Valar morghulis".data(using: String.Encoding.utf8)!,
-            ["name":"John Doe"] as XMLRPCStructure
+            ["name":"John Doe"] 
 
         ]
 

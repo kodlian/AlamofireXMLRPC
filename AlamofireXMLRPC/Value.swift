@@ -142,6 +142,3 @@ extension Data: XMLRPCRawValueRepresentable {
         self = data
     }
 }
-
-public typealias XMLRPCStructure = [String:Any]
-public typealias XMLRPCArray = [Any]

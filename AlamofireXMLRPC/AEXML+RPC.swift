@@ -91,27 +91,15 @@ struct UnknownRPCValue: XMLRPCRawValueRepresentable {
 }
 
 // MARK: - Collectiom
-protocol XMLRPCArrayType { }
-extension Array: XMLRPCArrayType { }
-
-protocol XMLRPCStructureType { }
-extension Dictionary: XMLRPCStructureType { }
-
-
 extension AEXMLElement {
     fileprivate func addRPCValue(_ value: Any) {
         let xmlValue = addChild(rpcNode:XMLRPCNodeKind.value)
         switch value {
         case let v as XMLRPCRawValueRepresentable:
             xmlValue.addChild(rpcValue:v)
-        case is XMLRPCArrayType:
-            if let array = value as? [Any] {
-                xmlValue.addChild(AEXMLElement(rpcArray: array))
-            }
-        case is XMLRPCStructureType:
-            guard let dict = value as? [String:Any] else {
-                fallthrough
-            }
+        case let array as [Any]:
+            xmlValue.addChild(AEXMLElement(rpcArray: array))
+        case let dict as [String:Any]:
             xmlValue.addChild(AEXMLElement(rpcStructure: dict))
         default:
             xmlValue.addChild(rpcValue:UnknownRPCValue(value))

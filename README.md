@@ -119,9 +119,9 @@ end
 ### Method request
 ```swift
 // Call XMLRPC service with the sharedManager of Alamofire
-AlamofireXMLRPC.request("https://xmlrpcservice", method:"foo" parameters: [1,2.0,"ddd",["key":"value"] as XMLRPCStructure])
+AlamofireXMLRPC.request("https://xmlrpcservice", method:"foo" parameters: [1,2.0,"ddd",["key":"value"]])
 // Call XMLRPC service with your custom manager
-manager.requestXMLRPC("https://xmlrpcservice", method:"foo" parameters: [1,2.0,"ddd",["key":"value"] as XMLRPCStructure])
+manager.requestXMLRPC("https://xmlrpcservice", method:"foo" parameters: [1,2.0,"ddd",["key":"value"]])
 ```
 
 ### XMLRPC Request convertible
@@ -176,16 +176,17 @@ protocol XMLRPCRawValueRepresentable {
 ```
 
 #### Collection
-Swift arrays ```[Any]``` are convertible to XMLRPC arrays but you need to cast them as ```XMLRPCArray```.
+Swift arrays ```[Any]``` are convertible to XMLRPC arrays.
+
 ```swift
-[1,"too"] as XMLRPCArray
+[1,"too"]
 ```
 
-As well dictionaries ```[String:Any]``` are convertible to XMLRPC structure by casting them as ```XMLRPCStructure```.
-```swift
-["name":"John Doe","age":35] as XMLRPCStructure
-```
+As well dictionaries ```[String:Any]``` are convertible to XMLRPC structure.
 
+```swift
+["name":"John Doe","age":35]
+```
 
 
 ## Response
@@ -228,6 +229,3 @@ var count: Int?
 
 ## License
 AlamofireXMLRPC is released under the MIT license. See [LICENSE](LICENSE) for details.
-
-## TO DO
-- Find a way to avoid to cast array and dictionary for value mapping
