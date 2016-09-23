@@ -16,3 +16,5 @@ DerivedData
 *.o
 */Iconr
 Pods/
+*.xcworkspace/
+.DS_Store

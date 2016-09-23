@@ -33,13 +33,13 @@ extension SessionManager {
     }
 }
 
-public func request(_ url: URLConvertible, methodName: String, parameters: [Any]?, headers: [String : String]? = nil) -> Request {
+public func request(_ url: URLConvertible, methodName: String, parameters: [Any]?, headers: [String : String]? = nil) -> DataRequest {
     return SessionManager.default.requestXMLRPC(
         url, methodName: methodName, parameters: parameters, headers: headers
     )
 }
 
-public func request(_ XMLRPCRequest: XMLRPCRequestConvertible) -> Request {
+public func request(_ XMLRPCRequest: XMLRPCRequestConvertible) -> DataRequest {
     return SessionManager.default.request(XMLRPCRequest)
 }
 
@@ -112,7 +112,7 @@ extension DataRequest {
         }
     }
 
-    public func responseXMLRPC(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<XMLRPCNode>) -> Void) -> Self {
+    @discardableResult public func responseXMLRPC(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<XMLRPCNode>) -> Void) -> Self {
 
         return response(queue:queue, responseSerializer: DataRequest.XMLRPCResponseSerializer(), completionHandler: completionHandler)
     }
