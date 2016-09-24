@@ -229,7 +229,7 @@ var count: Int?
 
 #### Raw XML string
 
-For purpoises of debugging you can also get raw xml string this way:
+For purposes of debugging you can also get raw xml string this way:
 
 ```swift
 case .success(let value):
