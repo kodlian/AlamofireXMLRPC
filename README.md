@@ -227,5 +227,15 @@ var data: Data?
 var count: Int?
 ```
 
+#### Raw XML string
+
+For purpoises of debugging you can also get raw xml string this way:
+
+```swift
+case .success(let value):
+        var raw = value.rawXML
+        print(raw)
+```
+
 ## License
 AlamofireXMLRPC is released under the MIT license. See [LICENSE](LICENSE) for details.
