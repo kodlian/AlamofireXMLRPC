@@ -18,7 +18,8 @@ public struct XMLRPCNode {
     }()
 
     var xml: AEXMLElement
-
+    public var rawXML: String
+    
     init( xml rootXML: AEXMLElement) {
         var xml = rootXML
         while (xml.rpcNode == .value || xml.rpcNode == .parameter) &&  xml.children.count > 0 {
@@ -27,6 +28,7 @@ public struct XMLRPCNode {
             }
         }
         self.xml = xml
+        self.rawXML = xml.xml
     }
 }
 
