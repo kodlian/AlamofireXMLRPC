@@ -138,5 +138,30 @@ class ResponseSerializerTests: XCTestCase {
             XCTFail()
         }
     }
+    
+    func testXMLRPCInitializable() {
+        struct Person: XMLRPCInitializable {
+            let name: String
+            let age: Int
+            
+            init?(xmlRpcNode node: XMLRPCNode) {
+                guard let name = node["name"].string, let age = node["age"].int32 else {
+                    return nil
+                }
+                
+                self.name = name
+                self.age = Int(age)
+            }
+        }
+        let node = serialize("testStructParam").value!
+        let person: Person? = node[1].value()
+        XCTAssertNotNil(person)
+        XCTAssertEqual(person?.name, "John Doe")
+        XCTAssertEqual(person?.age, 32)
+        
+        let person2: Person? = node[0].value()
+        XCTAssertNil(person2)
+
+    }
 
 }

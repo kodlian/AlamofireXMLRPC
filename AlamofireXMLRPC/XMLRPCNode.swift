@@ -131,3 +131,22 @@ extension XMLRPCNode: CustomStringConvertible {
         return xml.value ?? ""
     }
 }
+
+// MARK: - Object Value
+public protocol XMLRPCInitializable  {
+    init?(xmlRpcNode: XMLRPCNode)
+}
+
+extension XMLRPCNode {
+    public func value<V: XMLRPCInitializable>() -> V? {
+        if self.error != nil {
+            return nil
+        }
+        
+        return V(xmlRpcNode: self)
+    }
+}
+
+
+
+
