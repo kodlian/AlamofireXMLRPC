@@ -105,7 +105,7 @@
 				3F93F3A11D623C7B002B4D50 /* call.xml */,
 			);
 			name = AlamofireXMLRPCTests;
-			path = Tests;
+			path = Tests/AlamofireXMLRPCTests;
 			sourceTree = "<group>";
 		};
 		630682121BC27C28005D7BC8 = {
@@ -142,7 +142,7 @@
 				630682211BC27C28005D7BC8 /* Info.plist */,
 			);
 			name = AlamofireXMLRPC;
-			path = Sources;
+			path = Sources/AlamofireXMLRPC;
 			sourceTree = "<group>";
 		};
 		EB695486185E3E32D83E0F0D /* Pods */ = {
