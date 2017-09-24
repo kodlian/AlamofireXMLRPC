@@ -103,8 +103,8 @@ It will generate the following call and lets you parse the corresponding answer 
 ```
 
 ## Requirements
- - iOS 8.0+ / Mac OS X 10.10+
- - Xcode 7
+ - iOS 9.0+ / Mac OS X 10.11+
+ - Xcode 9
 
 ## Install CocoaPods
 You can use [CocoaPods](http://cocoapods.org/) to install `AlamofireXMLRPC`by adding it to your `Podfile`:
