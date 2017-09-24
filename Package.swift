@@ -17,9 +17,13 @@ let package = Package(
     targets: [
         .target(
             name: "AlamofireXMLRPC",
-            dependencies: []),
+            dependencies: [],
+            path:"Sources"
+        ),
         .testTarget(
             name: "AlamofireXMLRPCTests",
-            dependencies: ["AlamofireXMLRPC"]),
+            dependencies: ["AlamofireXMLRPC"],
+            path:"Tests"
+        ),
     ]
 )
