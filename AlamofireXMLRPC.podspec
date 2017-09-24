@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.source       = { :git => "https://github.com/kodlian/AlamofireXMLRPC.git", :tag => "2.2.0" }
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  s.source_files  = "AlamofireXMLRPC/*.swift"
+  s.source_files  = "Source/*.swift"
 
   #  Dependency
   s.dependency 'Alamofire'
