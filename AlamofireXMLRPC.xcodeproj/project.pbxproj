@@ -142,7 +142,7 @@
 				630682211BC27C28005D7BC8 /* Info.plist */,
 			);
 			name = AlamofireXMLRPC;
-			path = Source;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		EB695486185E3E32D83E0F0D /* Pods */ = {
