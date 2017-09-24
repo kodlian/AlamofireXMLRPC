@@ -1,6 +1,6 @@
 PODS:
-  - AEXML (4.0.0)
-  - Alamofire (4.0.0)
+  - AEXML (4.1.0)
+  - Alamofire (4.5.1)
 
 DEPENDENCIES:
   - AEXML (from `https://github.com/tadija/AEXML.git`)
@@ -14,16 +14,16 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AEXML:
-    :commit: e352536e48d6cccd67b0853ce2d7b2772370496a
+    :commit: 2981eccd86a69ea12a7f71a4c6b4d5177c2972a9
     :git: https://github.com/tadija/AEXML.git
   Alamofire:
-    :commit: 0ac38d7e312e87aeea608d384e44401f3d8a6b3d
+    :commit: b8995447518fd57af14c88a47f27434a16f60403
     :git: https://github.com/Alamofire/Alamofire.git
 
 SPEC CHECKSUMS:
-  AEXML: 6fc6433aa35bdc15dd8eb8d54eb7aa4520a010eb
-  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  AEXML: fd282b96c01b38e97f0e54706d228a50a1abff1a
+  Alamofire: 0224236301daac8c6578172706304b66b48236b5
 
 PODFILE CHECKSUM: a5aa94a95f8c1cee7c46348bfbc0ba1bbe4b2fc7
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.3.1

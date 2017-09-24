@@ -58,7 +58,7 @@ extension Bool: XMLRPCRawValueRepresentable {
 }
 
 // MARK: Integer
-extension XMLRPCRawValueRepresentable where Self: Integer {
+extension XMLRPCRawValueRepresentable where Self: BinaryInteger {
     public static var xmlRpcKind: XMLRPCValueKind { return .Integer }
 }
 
@@ -66,22 +66,13 @@ public protocol StringRadixParsable {
     init?(_ text: String, radix: Int)
 }
 
-extension XMLRPCRawValueRepresentable where Self: StringRadixParsable {
+extension XMLRPCRawValueRepresentable where Self: FixedWidthInteger {
     public init?(xmlRpcRawValue: String) {
         self.init(xmlRpcRawValue, radix: 10)
     }
 }
 
-extension Int: StringRadixParsable { }
-extension Int32: StringRadixParsable { }
-extension Int8: StringRadixParsable { }
-extension UInt16: StringRadixParsable { }
-extension UInt8: StringRadixParsable { }
-
-
-extension Int: XMLRPCRawValueRepresentable {
-    public var xmlRpcRawValue: String { return String(Int32(self))} // Truncate Int
-}
+extension Int: XMLRPCRawValueRepresentable { }
 extension Int32: XMLRPCRawValueRepresentable { }
 extension Int16: XMLRPCRawValueRepresentable { }
 extension Int8: XMLRPCRawValueRepresentable { }
