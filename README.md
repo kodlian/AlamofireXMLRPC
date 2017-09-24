@@ -5,7 +5,7 @@
             )](http://mit-license.org)
 [![Platform](http://img.shields.io/badge/platform-iOS%20%26%20OSX-lightgrey.svg?style=flat
              )](https://developer.apple.com/resources/)
-[![Language](http://img.shields.io/badge/language-swift%203-orange.svg?style=flat
+[![Language](http://img.shields.io/badge/language-swift%204-orange.svg?style=flat
              )](https://developer.apple.com/swift)
 [![Issues](https://img.shields.io/github/issues/kodlian/AlamofireXMLRPC.svg?style=flat
                         )](https://github.com/kodlian/AlamofireXMLRPC/issues)
