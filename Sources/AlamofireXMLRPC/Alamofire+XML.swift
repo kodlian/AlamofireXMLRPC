@@ -22,8 +22,17 @@ extension DataRequest {
             }
 
             do {
-                let XML = try AEXMLDocument(xml: validData)
-                return .success(XML)
+                // Filter out control characters
+                if var text = String(data: validData, encoding: .utf8) {
+                    // Filter out all control characters except \n \t \r before parsing the XML
+                    let sets = CharacterSet.controlCharacters.subtracting(CharacterSet(charactersIn: "\n\t\r"))
+                    text = text.components(separatedBy: sets).joined()
+                    let XML = try AEXMLDocument(xml: text)
+                    return .success(XML)
+                } else {
+                    let XML = try AEXMLDocument(xml: validData)
+                    return .success(XML)
+                }
             } catch {
                 return .failure(error)
             }
