@@ -460,7 +460,7 @@
 			baseConfigurationReference = 832277C84E058678264DE9C8 /* Pods-AlamofireXMLRPCTests.debug.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = AlamofireXMLRPCTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/AlamofireXMLRPCTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kodlian.AlamofireXMLRPCTests;
@@ -475,7 +475,7 @@
 			baseConfigurationReference = 03490A74537FFB87195A71A1 /* Pods-AlamofireXMLRPCTests.release.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = AlamofireXMLRPCTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/AlamofireXMLRPCTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kodlian.AlamofireXMLRPCTests;
@@ -606,7 +606,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = AlamofireXMLRPC/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/AlamofireXMLRPC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
@@ -631,7 +631,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = AlamofireXMLRPC/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/AlamofireXMLRPC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kodlian.AlamofireXMLRPC;
