@@ -9,9 +9,17 @@
 import Foundation
 
 public enum XMLRPCError: Error {
+    public enum ResponseSerializationFailureReason {
+        case inputDataNilOrZeroLength
+        case nodeNotFound(node: XMLRPCNodeKind)
+        case xmlSerializationFailed(error: Error)
+    }
+
     case networkError(Error?)
     case xmlSerializationFailed
     case parseFailed
     case nodeNotFound(node: XMLRPCNodeKind)
     case fault(node: XMLRPCNode)
+    case responseSerializationFailed(reason: ResponseSerializationFailureReason)
 }
+

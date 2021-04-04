@@ -11,28 +11,63 @@ import AEXML
 import Alamofire
 
 extension DataRequest {
-    public static func XMLResponseSerializer() -> DataResponseSerializer<AEXMLDocument> {
-        return DataResponseSerializer { request, response, data, error in
-            if let e = error {
-                return .failure(e)
-            }
-
-            guard let validData = data else {
-                return .failure(AFError.responseValidationFailed(reason: AFError.ResponseValidationFailureReason.dataFileNil))
-            }
-
-            do {
-                let XML = try AEXMLDocument(xml: validData)
-                return .success(XML)
-            } catch {
-                return .failure(error)
-            }
-        }
-    }
-
-    public func responseXMLDocument(queue: DispatchQueue? = nil,  completionHandler: @escaping (DataResponse<AEXMLDocument>) -> Void) -> Self {
-        return response(queue: queue, responseSerializer: DataRequest.XMLResponseSerializer(), completionHandler: completionHandler)
+    @discardableResult public func responseXML(
+        queue: DispatchQueue = .main,
+        dataPreprocessor: DataPreprocessor = XMLResponseSerializer.defaultDataPreprocessor,
+        emptyResponseCodes: Set<Int> = XMLResponseSerializer.defaultEmptyResponseCodes,
+        emptyRequestMethods: Set<HTTPMethod> = XMLResponseSerializer.defaultEmptyRequestMethods,
+        completionHandler: @escaping (AFDataResponse<AEXMLDocument>) -> Void
+    ) -> Self {
+        response(
+            queue: queue,
+            responseSerializer: XMLResponseSerializer(
+                dataPreprocessor: dataPreprocessor,
+                emptyResponseCodes: emptyResponseCodes,
+                emptyRequestMethods: emptyRequestMethods
+            ),
+            completionHandler: completionHandler)
     }
 }
 
+public class XMLResponseSerializer: ResponseSerializer {
+    public let dataPreprocessor: DataPreprocessor
+    public let emptyResponseCodes: Set<Int>
+    public let emptyRequestMethods: Set<HTTPMethod>
 
+    public init(
+        dataPreprocessor: DataPreprocessor = XMLResponseSerializer.defaultDataPreprocessor,
+        emptyResponseCodes: Set<Int> = XMLResponseSerializer.defaultEmptyResponseCodes,
+        emptyRequestMethods: Set<HTTPMethod> = XMLResponseSerializer.defaultEmptyRequestMethods
+    ) {
+        self.dataPreprocessor = dataPreprocessor
+        self.emptyResponseCodes = emptyResponseCodes
+        self.emptyRequestMethods = emptyRequestMethods
+    }
+
+    public func serialize(
+        request: URLRequest?,
+        response: HTTPURLResponse?,
+        data: Data?,
+        error: Error?
+    ) throws -> AEXMLDocument {
+        guard error == nil else { throw error! }
+
+        guard var data = data, !data.isEmpty else {
+            guard emptyResponseAllowed(forRequest: request, response: response) else {
+                throw AFError.responseSerializationFailed(reason: .inputDataNilOrZeroLength)
+            }
+
+            let errorDocument = AEXMLDocument()
+            errorDocument.error = .parsingFailed
+            return errorDocument
+        }
+
+        data = try dataPreprocessor.preprocess(data)
+
+        do {
+            return try AEXMLDocument(xml: data)
+        } catch {
+            throw XMLRPCError.responseSerializationFailed(reason: .xmlSerializationFailed(error: error))
+        }
+    }
+}

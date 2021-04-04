@@ -29,7 +29,6 @@ public enum XMLRPCNodeKind: String {
 
 extension XMLRPCValueKind {
     init?(xml: AEXMLElement) {
-
         if let kind = XMLRPCValueKind(rawValue: xml.name) {
             self = kind
         } else {
@@ -44,10 +43,8 @@ extension XMLRPCValueKind {
                 return nil
             }
         }
-
     }
 }
-
 
 // MARK: RPC Node
 extension AEXMLElement {
@@ -99,7 +96,7 @@ extension AEXMLElement {
             xmlValue.addChild(rpcValue:v)
         case let array as [Any]:
             xmlValue.addChild(AEXMLElement(rpcArray: array))
-        case let dict as [String:Any]:
+        case let dict as [String: Any]:
             xmlValue.addChild(AEXMLElement(rpcStructure: dict))
         default:
             xmlValue.addChild(rpcValue:UnknownRPCValue(value))
@@ -122,7 +119,7 @@ extension AEXMLElement {
         }
     }
 
-    convenience init(rpcStructure: [String:Any]) {
+    convenience init(rpcStructure: [String: Any]) {
         self.init(rpcNode: XMLRPCNodeKind.structure)
 
         for (key, value) in rpcStructure {
@@ -139,6 +136,4 @@ extension AEXMLElement {
 
         return rpcNode == XMLRPCNodeKind.array ? self[.data].children : children
     }
-
-
 }

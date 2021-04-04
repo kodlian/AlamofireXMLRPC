@@ -19,9 +19,9 @@ public struct XMLRPCNode {
 
     var xml: AEXMLElement
 
-    init( xml rootXML: AEXMLElement) {
+    init(xml rootXML: AEXMLElement) {
         var xml = rootXML
-        while (xml.rpcNode == .value || xml.rpcNode == .parameter) &&  xml.children.count > 0 {
+        while (xml.rpcNode == .value || xml.rpcNode == .parameter) && xml.children.count > 0 {
             if let child = xml.children.first {
                 xml = child
             }
@@ -82,12 +82,12 @@ extension XMLRPCNode {
         return type(of: self).errorNode
     }
 
-    public var dictionary: [String:XMLRPCNode]? {
+    public var dictionary: [String: XMLRPCNode]? {
         guard xml.rpcNode == XMLRPCNodeKind.structure else {
             return nil
         }
 
-        var dictionary = [String:XMLRPCNode]()
+        var dictionary = [String: XMLRPCNode]()
 
         for child in xml.children {
             if let key = child[XMLRPCNodeKind.name].value {
@@ -146,7 +146,3 @@ extension XMLRPCNode {
         return V(xmlRpcNode: self)
     }
 }
-
-
-
-

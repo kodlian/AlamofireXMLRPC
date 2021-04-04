@@ -10,7 +10,7 @@
 		3F1780291BC6D8AC00DFDB76 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1780281BC6D8AC00DFDB76 /* Value.swift */; };
 		3F17802B1BC6DC0100DFDB76 /* AEXML+RPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17802A1BC6DC0100DFDB76 /* AEXML+RPC.swift */; };
 		3F93F38E1D61BE74002B4D50 /* XMLRPCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93F38D1D61BE74002B4D50 /* XMLRPCError.swift */; };
-		3F93F3901D61DA92002B4D50 /* ResponseSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93F38F1D61DA92002B4D50 /* ResponseSerializerTests.swift */; };
+		3F93F3901D61DA92002B4D50 /* XMLRPCResponseSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93F38F1D61DA92002B4D50 /* XMLRPCResponseSerializerTests.swift */; };
 		3F93F3921D61DACE002B4D50 /* testFault.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F3911D61DACE002B4D50 /* testFault.xml */; };
 		3F93F3961D620A47002B4D50 /* testFaultStruct.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F3951D620A47002B4D50 /* testFaultStruct.xml */; };
 		3F93F3981D620B50002B4D50 /* testParams.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3F93F3971D620B50002B4D50 /* testParams.xml */; };
@@ -45,7 +45,7 @@
 		3F17802A1BC6DC0100DFDB76 /* AEXML+RPC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AEXML+RPC.swift"; sourceTree = "<group>"; };
 		3F17802C1BC7008B00DFDB76 /* Alamofire+XML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Alamofire+XML.swift"; sourceTree = "<group>"; };
 		3F93F38D1D61BE74002B4D50 /* XMLRPCError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLRPCError.swift; sourceTree = "<group>"; };
-		3F93F38F1D61DA92002B4D50 /* ResponseSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseSerializerTests.swift; sourceTree = "<group>"; };
+		3F93F38F1D61DA92002B4D50 /* XMLRPCResponseSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLRPCResponseSerializerTests.swift; sourceTree = "<group>"; };
 		3F93F3911D61DACE002B4D50 /* testFault.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testFault.xml; sourceTree = "<group>"; };
 		3F93F3951D620A47002B4D50 /* testFaultStruct.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testFaultStruct.xml; sourceTree = "<group>"; };
 		3F93F3971D620B50002B4D50 /* testParams.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testParams.xml; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 			children = (
 				3FF3D54E1BC81FA300599A37 /* AlamofireXMLRPCTests.swift */,
 				3FF3D5501BC81FA300599A37 /* Info.plist */,
-				3F93F38F1D61DA92002B4D50 /* ResponseSerializerTests.swift */,
+				3F93F38F1D61DA92002B4D50 /* XMLRPCResponseSerializerTests.swift */,
 				3F93F39F1D623BFE002B4D50 /* XMLRPCCallTests.swift */,
 				3F93F3991D62103F002B4D50 /* testStructParam.xml */,
 				3F93F39B1D621163002B4D50 /* testArrayParam.xml */,
@@ -379,7 +379,7 @@
 			files = (
 				3F93F3A01D623BFE002B4D50 /* XMLRPCCallTests.swift in Sources */,
 				3FF3D54F1BC81FA300599A37 /* AlamofireXMLRPCTests.swift in Sources */,
-				3F93F3901D61DA92002B4D50 /* ResponseSerializerTests.swift in Sources */,
+				3F93F3901D61DA92002B4D50 /* XMLRPCResponseSerializerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

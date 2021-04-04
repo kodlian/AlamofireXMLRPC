@@ -81,13 +81,13 @@ extension UInt8: XMLRPCRawValueRepresentable { }
 
 // MARK: Floating Point
 public extension XMLRPCRawValueRepresentable where Self: LosslessStringConvertible {
-    public init?(xmlRpcRawValue: String) {
+    init?(xmlRpcRawValue: String) {
         self.init(xmlRpcRawValue)
     }
 }
 
 public extension XMLRPCRawValueRepresentable where Self: FloatingPoint {
-    public static var xmlRpcKind: XMLRPCValueKind { return .Double }
+    static var xmlRpcKind: XMLRPCValueKind { return .Double }
 }
 
 extension Double: XMLRPCRawValueRepresentable { }
