@@ -67,6 +67,12 @@
 		6974086A869525ECB87A79F5 /* Pods_AlamofireXMLRPCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlamofireXMLRPCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		832277C84E058678264DE9C8 /* Pods-AlamofireXMLRPCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlamofireXMLRPCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlamofireXMLRPCTests/Pods-AlamofireXMLRPCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8EB4BE68C4AC30489CCE89F1 /* Pods_AlamofireXMLRPC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlamofireXMLRPC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB0411B8261B8B4B00C92732 /* AlamofireXMLRPC.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; indentWidth = 2; path = AlamofireXMLRPC.podspec; sourceTree = "<group>"; tabWidth = 2; };
+		AB4DE684261BA2670001A636 /* .swift-version */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".swift-version"; sourceTree = "<group>"; };
+		AB4DE685261BA2670001A636 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		AB6A66A6261B7F3600DFE928 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		AB6A66A8261B7F3600DFE928 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AB6A66A9261B7F3600DFE928 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,12 +117,18 @@
 		630682121BC27C28005D7BC8 = {
 			isa = PBXGroup;
 			children = (
-				3F93F3A31D624780002B4D50 /* .travis.yml */,
 				6306821E1BC27C28005D7BC8 /* AlamofireXMLRPC */,
 				3FF3D54D1BC81FA300599A37 /* AlamofireXMLRPCTests */,
-				6306821D1BC27C28005D7BC8 /* Products */,
-				EB695486185E3E32D83E0F0D /* Pods */,
 				F296BF02E35720E5C1B86BE0 /* Frameworks */,
+				EB695486185E3E32D83E0F0D /* Pods */,
+				6306821D1BC27C28005D7BC8 /* Products */,
+				AB4DE685261BA2670001A636 /* .gitignore */,
+				AB4DE684261BA2670001A636 /* .swift-version */,
+				3F93F3A31D624780002B4D50 /* .travis.yml */,
+				AB0411B8261B8B4B00C92732 /* AlamofireXMLRPC.podspec */,
+				AB6A66A9261B7F3600DFE928 /* LICENSE */,
+				AB6A66A6261B7F3600DFE928 /* Package.swift */,
+				AB6A66A8261B7F3600DFE928 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,14 +144,14 @@
 		6306821E1BC27C28005D7BC8 /* AlamofireXMLRPC */ = {
 			isa = PBXGroup;
 			children = (
-				3F1780281BC6D8AC00DFDB76 /* Value.swift */,
 				3F17802A1BC6DC0100DFDB76 /* AEXML+RPC.swift */,
-				3F93F39D1D62288D002B4D50 /* XMLRPCNode.swift */,
+				6306821F1BC27C28005D7BC8 /* AlamofireXMLRPC.h */,
 				3F17802C1BC7008B00DFDB76 /* Alamofire+XML.swift */,
 				630682271BC29885005D7BC8 /* Alamofire+XMLRPC.swift */,
-				3F93F38D1D61BE74002B4D50 /* XMLRPCError.swift */,
-				6306821F1BC27C28005D7BC8 /* AlamofireXMLRPC.h */,
 				630682211BC27C28005D7BC8 /* Info.plist */,
+				3F1780281BC6D8AC00DFDB76 /* Value.swift */,
+				3F93F38D1D61BE74002B4D50 /* XMLRPCError.swift */,
+				3F93F39D1D62288D002B4D50 /* XMLRPCNode.swift */,
 			);
 			name = AlamofireXMLRPC;
 			path = Sources/AlamofireXMLRPC;
