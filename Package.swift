@@ -8,4 +8,3 @@ let package = Package(
         .Package(url: "https://github.com/tadija/AEXML.git", majorVersion: 4)
     ]
 )
-

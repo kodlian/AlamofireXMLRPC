@@ -7,13 +7,15 @@
 //
 
 import XCTest
-@testable import AlamofireXMLRPC
 import Alamofire
+@testable import AlamofireXMLRPC
 
 class XMLRPCResponseSerializerTests: XCTestCase {
-
     fileprivate func serialize(_ name: String) throws -> XMLRPCNode? {
-        let url = Bundle(for: XMLRPCResponseSerializerTests.self).url(forResource: name, withExtension: "xml", subdirectory: nil)!
+        let url = Bundle(for: XMLRPCResponseSerializerTests.self).url(
+            forResource: name,
+            withExtension: "xml",
+            subdirectory: nil)!
         let data = try? Data(contentsOf: url)
         return try XMLRPCResponseSerializer().serialize(request: nil, response: nil, data: data, error: nil)
     }
@@ -139,17 +141,17 @@ class XMLRPCResponseSerializerTests: XCTestCase {
             return
         }
     }
-    
+
     func testXMLRPCInitializable() {
         struct Person: XMLRPCInitializable {
             let name: String
             let age: Int
-            
+
             init?(xmlRpcNode node: XMLRPCNode) {
                 guard let name = node["name"].string, let age = node["age"].int32 else {
                     return nil
                 }
-                
+
                 self.name = name
                 self.age = Int(age)
             }
@@ -176,7 +178,7 @@ class XMLRPCResponseSerializerTests: XCTestCase {
 
         XCTAssertEqual(person.name, "John Doe")
         XCTAssertEqual(person.age, 32)
-        
+
         let person2: Person? = node[0].value()
 
         XCTAssertNil(person2)

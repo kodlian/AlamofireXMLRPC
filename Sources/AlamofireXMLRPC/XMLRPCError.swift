@@ -22,4 +22,3 @@ public enum XMLRPCError: Error {
     case fault(node: XMLRPCNode)
     case responseSerializationFailed(reason: ResponseSerializationFailureReason)
 }
-

@@ -1,19 +1,23 @@
 PODS:
   - AEXML (4.6.0)
   - Alamofire (5.4.2)
+  - SwiftLint (0.43.1)
 
 DEPENDENCIES:
   - AEXML (~> 4.6.0)
   - Alamofire (~> 5.4.2)
+  - SwiftLint
 
 SPEC REPOS:
   trunk:
     - AEXML
     - Alamofire
+    - SwiftLint
 
 SPEC CHECKSUMS:
   AEXML: 2fbb73d8724797ed2cde888731e176fa4d44dd83
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
 PODFILE CHECKSUM: d3ec8a542581170f3be186381ec815171e6c31fc
 

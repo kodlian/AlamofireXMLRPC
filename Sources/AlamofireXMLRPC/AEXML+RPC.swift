@@ -35,10 +35,8 @@ extension XMLRPCValueKind {
             switch (xml.name, xml.children.count) {
             case (XMLRPCNodeKind.value.rawValue, 0):
                 self = .String
-
-            case ("i4",_):
+            case ("i4", _):
                 self = .Integer
-
             default:
                 return nil
             }
@@ -90,16 +88,16 @@ struct UnknownRPCValue: XMLRPCRawValueRepresentable {
 // MARK: - Collectiom
 extension AEXMLElement {
     fileprivate func addRPCValue(_ value: Any) {
-        let xmlValue = addChild(rpcNode:XMLRPCNodeKind.value)
+        let xmlValue = addChild(rpcNode: XMLRPCNodeKind.value)
         switch value {
-        case let v as XMLRPCRawValueRepresentable:
-            xmlValue.addChild(rpcValue:v)
+        case let rawValue as XMLRPCRawValueRepresentable:
+            xmlValue.addChild(rpcValue: rawValue)
         case let array as [Any]:
             xmlValue.addChild(AEXMLElement(rpcArray: array))
         case let dict as [String: Any]:
             xmlValue.addChild(AEXMLElement(rpcStructure: dict))
         default:
-            xmlValue.addChild(rpcValue:UnknownRPCValue(value))
+            xmlValue.addChild(rpcValue: UnknownRPCValue(value))
         }
     }
 

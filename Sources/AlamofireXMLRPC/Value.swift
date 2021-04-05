@@ -9,6 +9,7 @@
 import Foundation
 
 public enum XMLRPCValueKind: String {
+    // swiftlint:disable identifier_name
     case Integer = "int"
     case Double = "double"
     case Boolean = "boolean"
@@ -22,7 +23,6 @@ public protocol XMLRPCRawValueRepresentable {
     var xmlRpcRawValue: String { get }
     init?(xmlRpcRawValue: String)
 }
-
 
 public extension XMLRPCRawValueRepresentable {
     static var xmlRpcKind: XMLRPCValueKind { return .String }

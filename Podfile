@@ -3,11 +3,10 @@ use_frameworks!
 target 'AlamofireXMLRPC' do
   pod 'AEXML', '~> 4.6.0'
   pod 'Alamofire', '~> 5.4.2'
-end
+  pod 'SwiftLint'
 
-target 'AlamofireXMLRPCTests' do
-  pod 'AEXML', '~> 4.6.0'
-  pod 'Alamofire', '~> 5.4.1'
+  target 'AlamofireXMLRPCTests' do
+  end
 end
 
 post_install do |installer_representation|

@@ -16,7 +16,7 @@ class XMLRPCCallDocument: AEXMLDocument {
         // Build XMLRPC Call
         super.init()
         let xmlMethodCall = addChild(rpcNode: .methodCall)
-        xmlMethodCall.addChild(rpcNode: .methodName, value:methodName)
+        xmlMethodCall.addChild(rpcNode: .methodName, value: methodName)
         if let params = someParams {
             xmlMethodCall.addChild(AEXMLElement(rpcParams: params))
         }
@@ -25,14 +25,24 @@ class XMLRPCCallDocument: AEXMLDocument {
 
 // MARK: - Session
 extension Session {
-    public func requestXMLRPC(_ url: URLConvertible, methodName: String, parameters: [Any]?, headers: [String : String]? = nil) -> DataRequest {
+    public func requestXMLRPC(
+        _ url: URLConvertible,
+        methodName: String,
+        parameters: [Any]?,
+        headers: [String: String]? = nil
+    ) -> DataRequest {
         let request = XMLRPCRequest(url: url, methodName: methodName, parameters: parameters, headers: headers)
         let dataRequest = self.request(request)
         return dataRequest
     }
 }
 
-public func request(_ url: URLConvertible, methodName: String, parameters: [Any]?, headers: [String : String]? = nil) -> DataRequest {
+public func request(
+    _ url: URLConvertible,
+    methodName: String,
+    parameters: [Any]?,
+    headers: [String: String]? = nil
+) -> DataRequest {
     return Session.default.requestXMLRPC(
         url, methodName: methodName, parameters: parameters, headers: headers
     )
@@ -47,35 +57,38 @@ public protocol XMLRPCRequestConvertible: URLRequestConvertible {
     var url: URLConvertible { get }
     var methodName: String { get }
     var parameters: [Any]? { get }
-    var headers: [String : String]? { get }
+    var headers: [String: String]? { get }
 }
 
 extension XMLRPCRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         let url = try self.url.asURL()
-      
+
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
-        if let h = headers {
-            for (key, value) in h {
+        if let headers = self.headers {
+            for (key, value) in headers {
                 request.setValue(value, forHTTPHeaderField: key)
             }
         }
         request.setValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        guard let xmlData = XMLRPCCallDocument(methodName: methodName, parameters: parameters).xml.data(using: String.Encoding.utf8) else {
+        guard let xmlData = XMLRPCCallDocument(
+                methodName: methodName,
+                parameters: parameters).xml.data(using: String.Encoding.utf8)
+        else {
             throw XMLRPCError.parseFailed
         }
         request.httpBody = xmlData
-        
+
         return request
     }
 }
 
-fileprivate struct XMLRPCRequest: XMLRPCRequestConvertible {
+private struct XMLRPCRequest: XMLRPCRequestConvertible {
     var url: URLConvertible
     var methodName: String
     var parameters: [Any]?
-    var headers: [String : String]?
+    var headers: [String: String]?
 }
 
 // MARK: - Response
