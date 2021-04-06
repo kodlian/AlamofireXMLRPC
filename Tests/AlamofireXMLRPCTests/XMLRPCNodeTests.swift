@@ -11,10 +11,18 @@ import AEXML
 @testable import AlamofireXMLRPC
 
 class XMLRPCNodeTests: XCTestCase {
-    func testKind() {
-        let methodResponseElement = AEXMLElement(rpcNode: XMLRPCNodeKind.methodResponse)
-        let methodResponseNode = XMLRPCNode(xml: methodResponseElement)
+    func testInt() {
+        let element = AEXMLElement(rpcNode: XMLRPCNodeKind.parameter)
+        element.addChild(rpcValue: 1)
+        let node = XMLRPCNode(xml: element)
 
-        XCTAssert(methodResponseNode.kind == XMLRPCNodeKind.methodResponse)
+        XCTAssert(node.int == 1)
+    }
+
+    func testKind() {
+        let element = AEXMLElement(rpcNode: XMLRPCNodeKind.methodResponse)
+        let node = XMLRPCNode(xml: element)
+
+        XCTAssert(node.kind == XMLRPCNodeKind.methodResponse)
     }
 }

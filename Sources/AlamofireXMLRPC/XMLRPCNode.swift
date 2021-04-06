@@ -101,6 +101,8 @@ extension XMLRPCNode {
 extension XMLRPCNode {
     public var string: String? { return value() }
 
+    public var int: Int? { return value() }
+
     public var int32: Int32? { return value() }
 
     public var double: Double? { return value() }
