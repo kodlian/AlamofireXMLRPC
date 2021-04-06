@@ -122,6 +122,10 @@ extension XMLRPCNode {
     public var error: AEXML.AEXMLError? {
         return xml.error
     }
+
+    public var kind: XMLRPCNodeKind? {
+        return self.xml.rpcNode
+    }
 }
 
 extension XMLRPCNode: CustomStringConvertible {

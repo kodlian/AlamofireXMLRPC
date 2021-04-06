@@ -139,9 +139,8 @@ public class XMLRPCResponseSerializer: ResponseSerializer {
                 throw XMLRPCError.responseSerializationFailed(reason: .inputDataNilOrZeroLength)
             }
 
-            let errorElement = AEXMLElement(name: "Error")
-            errorElement.error = .parsingFailed
-            return XMLRPCNode(xml: errorElement)
+            let emptyMethodElement = AEXMLElement(rpcNode: XMLRPCNodeKind.methodResponse)
+            return XMLRPCNode(xml: emptyMethodElement)
         }
 
         data = try dataPreprocessor.preprocess(data)

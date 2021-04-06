@@ -25,6 +25,8 @@
 		3FF3D5511BC81FA300599A37 /* AlamofireXMLRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6306821C1BC27C28005D7BC8 /* AlamofireXMLRPC.framework */; };
 		630682201BC27C28005D7BC8 /* AlamofireXMLRPC.h in Headers */ = {isa = PBXBuildFile; fileRef = 6306821F1BC27C28005D7BC8 /* AlamofireXMLRPC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		67CF01F64E5D22FCBF7DE484 /* Pods_AlamofireXMLRPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB4BE68C4AC30489CCE89F1 /* Pods_AlamofireXMLRPC.framework */; };
+		AB89E21E261CC0B500A064C4 /* XMLRPCNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89E21D261CC0B500A064C4 /* XMLRPCNodeTests.swift */; };
+		AB89E224261CC90400A064C4 /* XMLResponseSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB89E223261CC90400A064C4 /* XMLResponseSerializerTests.swift */; };
 		F80080FF84960F46D6064A2C /* Pods_AlamofireXMLRPC_AlamofireXMLRPCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734CA487D4E5B63EE1B805F9 /* Pods_AlamofireXMLRPC_AlamofireXMLRPCTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,8 @@
 		AB6A66A6261B7F3600DFE928 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		AB6A66A8261B7F3600DFE928 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB6A66A9261B7F3600DFE928 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		AB89E21D261CC0B500A064C4 /* XMLRPCNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLRPCNodeTests.swift; sourceTree = "<group>"; };
+		AB89E223261CC90400A064C4 /* XMLResponseSerializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLResponseSerializerTests.swift; sourceTree = "<group>"; };
 		ABD07445261BA9C30096E113 /* .swift-version */ = {isa = PBXFileReference; explicitFileType = text.yaml; path = ".swift-version"; sourceTree = "<group>"; };
 		E6A4D09B256C9E3D060D8585 /* Pods-AlamofireXMLRPC-AlamofireXMLRPCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlamofireXMLRPC-AlamofireXMLRPCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlamofireXMLRPC-AlamofireXMLRPCTests/Pods-AlamofireXMLRPC-AlamofireXMLRPCTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,14 +105,16 @@
 			isa = PBXGroup;
 			children = (
 				3FF3D5501BC81FA300599A37 /* Info.plist */,
-				3F93F38F1D61DA92002B4D50 /* XMLRPCResponseSerializerTests.swift */,
-				3F93F39F1D623BFE002B4D50 /* XMLRPCCallTests.swift */,
-				3F93F3991D62103F002B4D50 /* testStructParam.xml */,
+				3F93F3A11D623C7B002B4D50 /* call.xml */,
 				3F93F39B1D621163002B4D50 /* testArrayParam.xml */,
-				3F93F3971D620B50002B4D50 /* testParams.xml */,
 				3F93F3911D61DACE002B4D50 /* testFault.xml */,
 				3F93F3951D620A47002B4D50 /* testFaultStruct.xml */,
-				3F93F3A11D623C7B002B4D50 /* call.xml */,
+				3F93F3971D620B50002B4D50 /* testParams.xml */,
+				3F93F3991D62103F002B4D50 /* testStructParam.xml */,
+				AB89E223261CC90400A064C4 /* XMLResponseSerializerTests.swift */,
+				3F93F39F1D623BFE002B4D50 /* XMLRPCCallTests.swift */,
+				AB89E21D261CC0B500A064C4 /* XMLRPCNodeTests.swift */,
+				3F93F38F1D61DA92002B4D50 /* XMLRPCResponseSerializerTests.swift */,
 			);
 			name = AlamofireXMLRPCTests;
 			path = Tests/AlamofireXMLRPCTests;
@@ -395,6 +401,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB89E224261CC90400A064C4 /* XMLResponseSerializerTests.swift in Sources */,
+				AB89E21E261CC0B500A064C4 /* XMLRPCNodeTests.swift in Sources */,
 				3F93F3A01D623BFE002B4D50 /* XMLRPCCallTests.swift in Sources */,
 				3F93F3901D61DA92002B4D50 /* XMLRPCResponseSerializerTests.swift in Sources */,
 			);

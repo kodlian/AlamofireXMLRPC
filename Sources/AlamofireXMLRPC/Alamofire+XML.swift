@@ -54,12 +54,10 @@ public class XMLResponseSerializer: ResponseSerializer {
 
         guard var data = data, !data.isEmpty else {
             guard emptyResponseAllowed(forRequest: request, response: response) else {
-                throw AFError.responseSerializationFailed(reason: .inputDataNilOrZeroLength)
+                throw XMLRPCError.responseSerializationFailed(reason: .inputDataNilOrZeroLength)
             }
 
-            let errorDocument = AEXMLDocument()
-            errorDocument.error = .parsingFailed
-            return errorDocument
+            return AEXMLDocument()
         }
 
         data = try dataPreprocessor.preprocess(data)

@@ -20,6 +20,47 @@ class XMLRPCResponseSerializerTests: XCTestCase {
         return try XMLRPCResponseSerializer().serialize(request: nil, response: nil, data: data, error: nil)
     }
 
+    func testEmptyResponse() {
+        let serializer = XMLRPCResponseSerializer()
+        let responseURL = URL(string: "http://localhost")!
+        let response = HTTPURLResponse(url: responseURL, statusCode: 200, httpVersion: nil, headerFields: nil)
+
+        do {
+            _ = try serializer.serialize(request: nil, response: response, data: nil, error: nil)
+        } catch XMLRPCError.responseSerializationFailed(let reason) {
+            switch reason {
+            case .inputDataNilOrZeroLength:
+                XCTAssertTrue(true)
+            default:
+                XCTFail("reason not input data nil or zero length: \(reason)")
+            }
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+    }
+
+    func testEmptyResponseWhenAllowed() {
+        let serializer = XMLRPCResponseSerializer()
+        let responseURL = URL(string: "http://localhost")!
+        let response = HTTPURLResponse(url: responseURL, statusCode: 204, httpVersion: nil, headerFields: nil)
+
+        var result: XMLRPCNode?
+
+        do {
+            result = try serializer.serialize(request: nil, response: response, data: nil, error: nil)
+        } catch {
+            XCTFail(error.localizedDescription)
+            return
+        }
+
+        guard let node = result else {
+            XCTFail("node is nil")
+            return
+        }
+
+        XCTAssert(node.kind == XMLRPCNodeKind.methodResponse)
+    }
+
     func testParams() {
         var result: XMLRPCNode?
 
