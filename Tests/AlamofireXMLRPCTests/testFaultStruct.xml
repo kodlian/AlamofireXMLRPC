@@ -4,15 +4,13 @@
         <value>
             <struct>
                 <member>
-                    <name>code</name>
+                    <name>faultCode</name>
                     <value><int>26</int></value>
                 </member>
-                
                 <member>
-                    <name>message</name>
+                    <name>faultString</name>
                     <value><string>No such method!</string></value>
                 </member>
-                
             </struct>
         </value>
     </fault>

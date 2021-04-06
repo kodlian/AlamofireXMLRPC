@@ -1,9 +1,9 @@
 language: objective-c
-osx_image: xcode9
+osx_image: xcode12
 cache:
 - bundler
 - cocoapods
 script:
-- xcodebuild -scheme AlamofireXMLRPC -workspace AlamofireXMLRPC.xcworkspace -sdk macosx10.13 build test
+- xcodebuild -scheme AlamofireXMLRPC -workspace AlamofireXMLRPC.xcworkspace build test
 after_success:
 - bash <(curl -s https://codecov.io/bash) -J 'AlamofireXMLRPC'

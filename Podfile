@@ -1,14 +1,18 @@
-# Uncomment this line to define a global platform for your project
 use_frameworks!
 
 target 'AlamofireXMLRPC' do
-  pod 'AEXML', :git => "https://github.com/tadija/AEXML.git"
-  pod 'Alamofire', :git => "https://github.com/Alamofire/Alamofire.git"
+  pod 'AEXML', '~> 4.6.0'
+  pod 'Alamofire', '~> 5.4.2'
+  pod 'SwiftLint'
+
+  target 'AlamofireXMLRPCTests' do
+  end
 end
 
-
-
-target 'AlamofireXMLRPCTests' do
-    pod 'AEXML', :git => "https://github.com/tadija/AEXML.git"
-    pod 'Alamofire', :git => "https://github.com/Alamofire/Alamofire.git"
+post_install do |installer_representation|
+  installer_representation.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+    end
+  end
 end

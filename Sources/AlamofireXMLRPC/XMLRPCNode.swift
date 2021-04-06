@@ -19,9 +19,9 @@ public struct XMLRPCNode {
 
     var xml: AEXMLElement
 
-    init( xml rootXML: AEXMLElement) {
+    init(xml rootXML: AEXMLElement) {
         var xml = rootXML
-        while (xml.rpcNode == .value || xml.rpcNode == .parameter) &&  xml.children.count > 0 {
+        while (xml.rpcNode == .value || xml.rpcNode == .parameter) && xml.children.count > 0 {
             if let child = xml.children.first {
                 xml = child
             }
@@ -32,14 +32,14 @@ public struct XMLRPCNode {
 
 // MARK: - Array
 extension XMLRPCNode: Collection {
-    public func index(after i: Int) -> Int {
-        return xml.rpcChildren?.index(after: i) ?? 0
+    public func index(after index: Int) -> Int {
+        return xml.rpcChildren?.index(after: index) ?? 0
     }
 
     public var array: [XMLRPCNode]? {
         if let children = xml.rpcChildren {
-            return children.map { e in
-                if let value = e.children.first {
+            return children.map { element in
+                if let value = element.children.first {
                     return XMLRPCNode(xml: value)
                 }
                 return type(of: self).errorNode
@@ -58,7 +58,7 @@ extension XMLRPCNode: Collection {
     }
 
     public subscript(key: Int) -> XMLRPCNode {
-        guard let children = xml.rpcChildren , (key >= 0 && key < children.count) else {
+        guard let children = xml.rpcChildren, (key >= 0 && key < children.count) else {
             return type(of: self).errorNode
         }
 
@@ -66,28 +66,26 @@ extension XMLRPCNode: Collection {
     }
 }
 
-
 // MARK: - Struct
 extension XMLRPCNode {
     public subscript(key: String) -> XMLRPCNode {
         guard xml.rpcNode == XMLRPCNodeKind.structure else {
             return type(of: self).errorNode
         }
-        for child in xml.children {
-            if child[XMLRPCNodeKind.name].value == key {
-                return XMLRPCNode(xml: child[XMLRPCNodeKind.value])
-            }
+
+        for child in xml.children where child[XMLRPCNodeKind.name].value == key {
+            return XMLRPCNode(xml: child[XMLRPCNodeKind.value])
         }
 
         return type(of: self).errorNode
     }
 
-    public var dictionary: [String:XMLRPCNode]? {
+    public var dictionary: [String: XMLRPCNode]? {
         guard xml.rpcNode == XMLRPCNodeKind.structure else {
             return nil
         }
 
-        var dictionary = [String:XMLRPCNode]()
+        var dictionary = [String: XMLRPCNode]()
 
         for child in xml.children {
             if let key = child[XMLRPCNodeKind.name].value {
@@ -103,6 +101,8 @@ extension XMLRPCNode {
 extension XMLRPCNode {
     public var string: String? { return value() }
 
+    public var int: Int? { return value() }
+
     public var int32: Int32? { return value() }
 
     public var double: Double? { return value() }
@@ -110,7 +110,7 @@ extension XMLRPCNode {
     public var bool: Bool? { return value() }
 
     public func value<V: XMLRPCRawValueRepresentable>() -> V? {
-        guard let value = xml.value, let nodeKind = XMLRPCValueKind(xml: xml) , nodeKind == V.xmlRpcKind else {
+        guard let value = xml.value, let nodeKind = XMLRPCValueKind(xml: xml), nodeKind == V.xmlRpcKind else {
             return nil
         }
 
@@ -124,6 +124,10 @@ extension XMLRPCNode {
     public var error: AEXML.AEXMLError? {
         return xml.error
     }
+
+    public var kind: XMLRPCNodeKind? {
+        return self.xml.rpcNode
+    }
 }
 
 extension XMLRPCNode: CustomStringConvertible {
@@ -133,7 +137,7 @@ extension XMLRPCNode: CustomStringConvertible {
 }
 
 // MARK: - Object Value
-public protocol XMLRPCInitializable  {
+public protocol XMLRPCInitializable {
     init?(xmlRpcNode: XMLRPCNode)
 }
 
@@ -142,11 +146,7 @@ extension XMLRPCNode {
         if self.error != nil {
             return nil
         }
-        
+
         return V(xmlRpcNode: self)
     }
 }
-
-
-
-

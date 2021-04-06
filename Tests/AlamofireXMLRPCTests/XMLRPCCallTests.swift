@@ -7,44 +7,33 @@
 //
 
 import XCTest
-@testable import AlamofireXMLRPC
 import Alamofire
+@testable import AlamofireXMLRPC
 
 class XMLRPCCallTests: XCTestCase {
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
     func testCall() {
-
         let parameters: [Any] = [
             "Hello",
             42,
             3.14,
             true, iso8601DateFormatter.date(from: "19870513T08:27:30")!,
             "Valar morghulis".data(using: String.Encoding.utf8)!,
-            ["name":"John Doe"] 
-
+            ["name": "John Doe"]
         ]
 
         let path = Bundle(for: XMLRPCCallTests.self).path(forResource: "call", ofType: "xml", inDirectory: nil)!
 
-        let text = try! String(contentsOfFile: path, encoding: String.Encoding.utf8).trimmingCharacters(in: CharacterSet(charactersIn: "\t\n"))
+        guard let text = try? String(contentsOfFile: path, encoding: .utf8)
+                .trimmingCharacters(in: CharacterSet(charactersIn: "\t\n"))
+        else {
+            XCTFail("reading contents of file '\(path)' failed")
+            return
+        }
 
         let call = XMLRPCCallDocument(methodName: "hello", parameters: parameters)
 
         XCTAssertEqual(call.xmlCompact, text)
 
         print(call.xmlCompact)
-
     }
-
-
 }
